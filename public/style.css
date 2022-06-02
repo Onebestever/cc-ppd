@@ -1,0 +1,23 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+}
+img{
+  height: 200px;
+}
+
+/* Home.ejs styling */
+#true{
+  background-color: lightgoldenrodyellow;
+}
+
+/* Index.ejs styling */
+#indexLanding{
+  background-image: url(dumbbell.jpg) !important;
+}
+
+/* Ordersystem.ejs styling */
+
+#orderSystem{
+  background-color: gray;
+}

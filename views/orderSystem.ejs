@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>21 Savage Fan Site</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body id="orderSystem">
+    <section class="container">
+        <section class="page-header text-center">
+            <!-- <a href="/logout" class="btn btn-default btn-sm">Logout</a> -->
+            <nav>
+                <a href="/" class="btn btn-default btn-sm">Home</a>
+                <a href="/login" class="btn btn-default btn-sm">Barista Login</a>
+                <a href="/signup" class="btn btn-default btn-sm">Barista Signup</a>
+
+            </nav>
+            <h1>Start the order</h1>
+            <span>Pending Orders: 0</span>
+        </section>
+    </section>
+
+    <section class="container text-center plantMain">
+
+        <!-- LOCAL INFORMATION -->
+        <section class="row">
+            <section class="col-sm-4 plantBoxes">
+                <h2>Add a log</h2>
+
+
+
+                <form action="/submitOrder" method="POST" role="form">
+                    <label for="">
+                        Customer Name:
+                        <input required type="text" name="customerName">
+                    </label>
+                    <!--                     
+                    <fieldset>
+                        <legend>Date:</legend>
+                        <input type="date" placeholder="Enter date" name="date" required>
+                        Add date object for this to autofill
+                    </fieldset> -->
+
+                    <fieldset>
+                        <legend>Size</legend>
+                        <label for="tall">Tall</label>
+                        <input required type="radio" name="size" id="tall" value="Tall">
+
+                        <label for="grande">Grande</label>
+                        <input type="radio" name="size" id="grande" value="Grande">
+
+                        <label for="venti">Venti</label>
+                        <input type="radio" name="size" id="venti" value="Venti">
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Beverage</legend>
+
+                        <label for="tanzaniaPeaberry">Tanzania Peaberry</label>
+                        <input required type="radio" name="beverage" id="tanzaniaPeaberry" value="Tanzania Peaberry">
+
+                        <label for="hawaiiKona">Hawaii Kona</label>
+                        <input type="radio" name="beverage" id="hawaiiKona" value="Hawaii Kona">
+
+                        <label for="kopiLuwac">Kopi Luwac</label>
+                        <input type="radio" name="beverage" id="kopiLuwac" value="Kopi Luwac">
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Hot/Iced</legend>
+
+                        <label>
+                            Hot
+                            <input required type="radio" name="temperature" value="Hot"></label>
+                        <label>
+                            Iced
+                            <input type="radio" name="temperature" value="Iced"></label>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Add-Ons</legend>
+                        <h4>Sugar:</h4>
+
+                        <label>
+                            No Sugar
+                            <input required type="radio" name="sugar" value="No Sugar"></label>
+                        <label>
+                            Light
+                            <input type="radio" name="sugar" value="Light"></label>
+                        <label>
+                            Regular
+                            <input type="radio" name="sugar" value="Regular"></label>
+                        <label>
+                            Extra
+                            <input type="radio" name="sugar" value="Extra"></label>
+
+                        <h4>Flavor</h4>
+                        <label>
+                            Caramel
+                            <input required type="radio" name="flavor" value="Caramel">
+                        </label>
+                        <label>
+                            Mocha
+                            <input type="radio" name="flavor" value="Mocha">
+                        </label>
+                        <label>
+                            Vanilla
+                            <input type="radio" name="flavor" value="Vanilla">
+                        </label>
+
+                        <h4>Milk Options</h4>
+                        <label>
+                            No Milk
+                            <input required type="radio" name="milkOptions" value="No Milk">
+                        </label>
+                        <label>
+                            Whole Milk
+                            <input type="radio" name="milkOptions" value="Whole Milk">
+                        </label>
+                        <label>
+                            Lowfat Milk
+                            <input type="radio" name="milkOptions" value="Lowfat Milk">
+                        </label>
+                        <label>
+                            Oat Milk
+                            <input type="radio" name="milkOptions" value="Oat Milk">
+                        </label>
+                        <label>
+                            Almond Milk
+                            <input type="radio" name="milkOptions" value="Almond Milk">
+                        </label>
+                        <label>
+                            Light Cream
+                            <input type="radio" name="milkOptions" value="Light cream">
+                        </label>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend> Note:</legend>
+
+                        <textarea name="note" placeholder="Note" cols="20" rows="5"></textarea>
+                    </fieldset>
+                    <label for="submit">
+                        <input type="submit" name="Submit" id="submit">
+                    </label>
+                </form>
+
+
+
+            </section>
+
+
+
+
+
+        </section>
+
+    </section>
+
+    <script src="/main.js"></script>
+
+</body>
+
+</html>
