@@ -11,3 +11,5 @@
 ## Credit
 
 Modified from Scotch.io's auth tutorial
+
+<img src="img/ppd.png" alt="project example" width="250" height="300">

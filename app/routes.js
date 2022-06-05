@@ -105,9 +105,8 @@ const collectionName = 'journalEntries'
           dailyPost: req.body.dailyPost,
           date: req.body.date, 
           emotion:req.body.emotion,
-          stressLvls: req.body.stressLvls,
-          harmToSelf: req.body.harmToSelf,
-          harmToOthers: req.body.harmToOthers,
+          stressLvls: req.body.stressLevel,
+          harmful: req.body.harmToSelf,
           starred: true}, (err, result) => {
         if (err) return console.log(err)
         //console.log(result)

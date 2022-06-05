@@ -1,6 +1,6 @@
 // // const thumbUp = document.getElementsByClassName("fa-thumbs-up");
-const check = document.getElementsByClassName("fa-check");
-const trash = document.getElementsByClassName("fa-trash-o");
+const check = document.getElementsByClassName("star");
+const trash = document.getElementsByClassName("trash");
 const customerName = document.getElementById('customerName') 
 // const addCareBtn = document.getElementsByClassName('addCareBtn')
 
@@ -66,7 +66,7 @@ Array.from(check).forEach(function(element) {
 Array.from(trash).forEach(function(element) {
     element.addEventListener('click', function(){
       const postObjectID = this.parentNode.parentNode.parentNode.parentNode.id
-  
+        alertMsg()
       fetch('deleteOrder', {
         method: 'delete',
         headers: {
@@ -80,7 +80,11 @@ Array.from(trash).forEach(function(element) {
       })
     });
   });
-  
+
+function alertMsg() {
+  alert("Are you sure you want to delete this? If so click the trash button again!");
+}
+
 
 // // Array.from(thumbUp).forEach(function(element) {
 // //       element.addEventListener('click', function(){
