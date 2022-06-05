@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>21 Savage Fan Site</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <section class="container">
+        <section class="page-header text-center">
+            <h1>Orders Page</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            <!-- <a href="/" class="btn btn-default btn-sm">Home</a> -->
+            <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+        </section>
+    </section>
+
+    <section class="container text-center">
+        
+        <% console.log(journalEntries) %>
+        <ul class="quotes">
+              <% for(var i=0; i<journalEntries.length; i++) {%>
+                <% let color %>
+                <% if (journalEntries[i].favorited === true) { %>
+                  <% color = "blue" %>
+                  <% } %>
+                 
+                <li class="message">
+                  <!-- <p style="<%= journalEntries[i].favorited ? 'color:blue' : '' %>"><%= journalEntries[i].date %><p> -->
+                  <p> <%= journalEntries[i].log %></p>
+                  <p><%= journalEntries[i].likes %></p>
+                  <p class="hide"><%= journalEntries[i]._id %></p>
+                  <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                  <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                </li>
+              <% } %>
+        </ul> 
+  
+    </section>
+
+    <script src="/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+#loginLanding h1,body{
+  font-family: 'Fredericka the Great', cursive;
+  color:#f3cd88;
+  background-image: url(img/login_back.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

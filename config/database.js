@@ -1,6 +1,6 @@
 // config/database.js
 module.exports = {
 
-    'url' : 'mongodb+srv://shay:SHCBk99XpMHfBkqX@cluster0.2n0wm.mongodb.net/coffee-shop?retryWrites=true&w=majority',
-    'dbName': 'coffee-shop'
+    'url' : 'mongodb+srv://carlaH:7DsR3Fm3JbEHgBtW@cluster0.c1lg4.mongodb.net/ppd?retryWrites=true&w=majority',
+    'dbName': 'ppd'
 };

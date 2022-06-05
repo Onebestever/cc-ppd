@@ -3,8 +3,8 @@ const user = require("./models/user");
 module.exports = function(app, passport, db) {
 
 const {ObjectId} = require('mongodb') //gives access to _id in mongodb
-
-const collectionName = 'orders'
+//Collection variable
+const collectionName = 'journalEntries'
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
@@ -14,17 +14,46 @@ const collectionName = 'orders'
 
     // PROFILE SECTION =========================
          //req.user if user is logged in and makigng a request, you can see everything bout that user also passed in.. Good for making profile pgs
-    app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection(collectionName).find().toArray((err, result) => {
-          if (err) return console.log(err)
-          console.log(result)
+    // app.get('/profile', isLoggedIn, function(req, res) {
+    //     db.collection(collectionName).find().toArray((err, result) => {
+    //       if (err) return console.log(err)
+    //       console.log(result)
 
           
-          res.render('profile.ejs', {
-            user : req.user
-          })
+    //       res.render('profile.ejs', {
+    //         user : req.user,
+    //         allUsers: result
+    //       })
+    //     })
+    // });
+    app.get('/profile', isLoggedIn, function(req, res) {
+      db.collection('journalEntries').find().toArray((err, result) => {
+        console.log(req.user)
+        if (err) return console.log(err)
+        console.log(result)
+
+   
+        res.render('profile.ejs', {
+          
+          user : req.user,
+          journalEntries: result,
+          // allUsers: result
         })
-    });
+      })
+  });
+    //VIEWERS LOGIN ////////
+    app.get('/viewers', isLoggedIn, function(req, res) {
+      db.collection('users').find().toArray((err, result) => {
+        if (err) return console.log(err)
+        console.log(result)
+
+        
+        res.render('viewers.ejs', {
+          user : req.user,
+          allUsers: result
+        })
+      })
+  });
 
   //   app.get('/profile', isLoggedIn, function(req, res) {
   //     db.collection('plants').find().toArray((err, result) => {
@@ -40,10 +69,10 @@ const collectionName = 'orders'
   //       })
   //     })
   // });
-
-    // barista SECTION =================================
-    app.get('/barista', isLoggedIn, function(req, res) {
-      db.collection(collectionName).find({name: req.user.local.email}).toArray((err, result) => {
+  // {name: req.user.local.email}
+//USER PROFILE
+    app.get('/viewers', isLoggedIn, function(req, res) {
+      db.collection(collectionName).find().toArray((err, result) => {
         if (err) return console.log(err)
         console.log('result', result)
 
@@ -51,9 +80,9 @@ const collectionName = 'orders'
         // let myWorkLogs = result.filter(doc => doc.name === req.user.local.email)
         // console.log('myWorkLogs', myWorkLogs)
 
-        res.render('barista.ejs', {
+        res.render('viewers.ejs', {
           user : req.user, 
-          myWorkLogs: result
+          orders: result
         })
       })
   });
@@ -64,23 +93,36 @@ const collectionName = 'orders'
         res.redirect('/');
     });
 
-// barista Page Routes ===============================================================
+// viewers Page Routes ===============================================================
 
-    app.post('/addWorkoutLog', (req, res) => {
-      db.collection(collectionName).insertOne({name: req.body.name, date: req.body.date, workoutHours: req.body.workoutHours, workoutMinutes: req.body.workoutMinutes, workoutRoutine: req.body.workoutRoutine, workoutNotes: req.body.workoutNotes, starred: true}, (err, result) => {
+
+
+
+
+
+    app.post('/log', (req, res) => {
+      db.collection(collectionName).insertOne({
+          dailyPost: req.body.dailyPost,
+          date: req.body.date, 
+          emotion:req.body.emotion,
+          stressLvls: req.body.stressLvls,
+          harmToSelf: req.body.harmToSelf,
+          harmToOthers: req.body.harmToOthers,
+          starred: true}, (err, result) => {
         if (err) return console.log(err)
         //console.log(result)
         console.log('saved to database')
-        res.redirect('/barista')
+        res.redirect('/profile')
       })
     })
 
-    app.put('/addStarred', (req, res) => {
+    app.put('/addChecked', (req, res) => {
         db.collection(collectionName)
         .findOneAndUpdate({ _id: ObjectId(req.body.postObjectID)}, 
         {
           $set: {
-            starred: true
+            complete: true,
+            thisUser: req.user.local.firstName
           }
         },
          {
@@ -92,12 +134,13 @@ const collectionName = 'orders'
         })
       })
 
-      app.put('/removeStarred', (req, res) => {
+      app.put('/removeChecked', (req, res) => {
         db.collection(collectionName)
         .findOneAndUpdate({ _id: ObjectId(req.body.postObjectID)}, 
         {
           $set: {
-            starred: false
+            complete: false,
+
           }
         },
          {
@@ -110,7 +153,7 @@ const collectionName = 'orders'
       })
 
 
-      app.delete('/deleteWorkoutPost', (req, res) => {
+      app.delete('/deleteOrder', (req, res) => {
         db.collection(collectionName).findOneAndDelete({ _id: ObjectId(req.body.postObjectID)}, (err, result) => {
           if (err) return res.send(500, err)
           res.send('Message deleted!')
@@ -155,7 +198,7 @@ app.post('/submitOrder', (req, res) => {
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/barista', // redirect to the secure profile section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -168,7 +211,7 @@ app.post('/submitOrder', (req, res) => {
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/barista', // redirect to the secure profile section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));

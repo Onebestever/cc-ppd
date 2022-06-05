@@ -1,0 +1,15 @@
+/* 
+#indexLanding{
+  background-image: url(img/popCorn.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+#indexLanding h1,body{
+  font-family: 'Fredericka the Great', cursive;
+  color:#f3cd88;
+  background-image: url(img/index.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* .jumbotron{ */

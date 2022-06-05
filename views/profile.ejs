@@ -1,19 +1,24 @@
 <!doctype html>
 <html>
 <head>
-    <title>21 Savage Fan Site</title>
+    <title>User Profile</title>
    
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/profile.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<div class="container">
+<body id="profileLanding">
+<div class="containerLanding">
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        <a href="/barista" class="btn btn-default btn-sm">Home</a>
+        <a href="/viewers" class="btn btn-default btn-sm">Home</a>
         <a href="/profile" class="btn btn-default btn-sm">Profile</a>
     </div>
 
@@ -26,9 +31,11 @@
 
                 <% if (user.local.email) { %>
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
+                        <!-- <strong>id</strong>: <%= user._id %><br> -->
+                        <strong>First Name</strong>: <%= user.local.firstName %><br>
+                        <strong>Last Name</strong>: <%= user.local.lastName %><br>
+                        <!-- <strong>email</strong>: <%= user.local.date %><br> -->
+                        <!-- <strong>password</strong>: <%= user.local.password %> -->
                     </p>
 
                     <a href="/unlink/local" class="btn btn-default">Unlink</a>
@@ -37,8 +44,109 @@
                 <% } %>
 
             </div>
-        
-</div>
+
+            <div class="log">
+                <form id="entryPad" action="/log" method="POST">
+                  <h2>Write your thoughts here</h2>
+                  <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
+                    <div id="msg">
+                    <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
+                    </div>
+                  <button type="submit">Share My Thoughts</button>
+
+  
+                    <fieldset>
+                        <legend>Current Emotion?</legend>
+                        <label for="Happy">Happy</label>
+                        <input required type="radio" name="emotion" id="tall" value="happy">
+
+                        <label for="grande">Sad</label>
+                        <input type="radio" name="emotion" id="grande" value="sad">
+
+                        <label for="venti">Angry</label>
+                        <input type="radio" name="emotion" id="venti" value="angry">
+
+                        <label for="venti">Frightened</label>
+                        <input type="radio" name="emotion" id="venti" value="frightened">
+
+                    </fieldset>
+                                    <!-- buttons -->
+                  <!-- dailyPost: req.body.dailyPost,
+                  date: req.body.date, 
+                  emotion:req.body.emotion,
+                  stressLvls: req.body.stressLvls,
+                  harmToSelf: req.body.harmToSelf,
+                  harmToOthers: req.body.harmToOthers, -->
+
+
+                  <!--  -->
+
+                    <fieldset>
+                        <legend>Stress Levels?</legend>
+
+                        <label for="high">High</label>
+                        <input required type="radio" name="stressLevel" id="high" value="high">
+
+                        <label for="medium">Medium</label>
+                        <input type="radio" name="stressLevel" id="medium" value="Medium">
+
+                        <label for="low">Low</label>
+                        <input type="radio" name="stressLevel" id="low" value="low">
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Harmful Thoughts?</legend>
+
+                        <label>
+                            Hot
+                            <input required type="radio" name="temperature" value="Hot"></label>
+                        <label>
+                            Iced
+                            <input type="radio" name="temperature" value="Iced"></label>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>How Can You Be supported?</legend>
+                        
+                    <fieldset>
+                        <legend> Note:</legend>
+
+                        <textarea name="note" placeholder="Note" cols="20" rows="5"></textarea>
+                    </fieldset>
+                    <label for="submit">
+                        <input type="submit" name="Submit" id="submit">
+                    </label>
+                </form>
+
+                </form> 
+            </div>
+                  
+                  <h3> Mood Logger</h3>
+                  
+  
+                  <% console.log(journalEntries) %>
+                  <ul class="entries">
+                        <% for(var i=0; i<journalEntries.length; i++) {%>
+                            <% let color %>
+                            <% if (journalEntries[i].favorited === true) { %>
+                              <% color = "pink" %>
+                              <% } %>
+                          <li class="message">
+                            <!-- <p style="<%= journalEntries[i].favorited ? 'color:blue' : '' %>"><%= journalEntries[i].date %><p> -->
+                             <p style="color:<%= color%>"><%= journalEntries[i].dailyPost %></p>
+                             <p style="color:<%= color%>"><%= journalEntries[i].date %></p>
+                            <p class="hide"><%= journalEntries[i]._id %></p>
+                            <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                          </li>
+                        <% } %>
+                  </ul> 
+            
+             <section class="container text-center">
+
+                    <!-- LOCAL INFORMATION -->
+                
 
 <script src="main.js"></script>
 

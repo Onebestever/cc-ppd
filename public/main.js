@@ -1,7 +1,7 @@
 // // const thumbUp = document.getElementsByClassName("fa-thumbs-up");
-const star = document.getElementsByClassName("fa-star-o");
+const check = document.getElementsByClassName("fa-check");
 const trash = document.getElementsByClassName("fa-trash-o");
-
+const customerName = document.getElementById('customerName') 
 // const addCareBtn = document.getElementsByClassName('addCareBtn')
 
 // const seeCareBtn = document.getElementsByClassName('seeCareBtn')
@@ -9,18 +9,24 @@ const trash = document.getElementsByClassName("fa-trash-o");
 // const updateForm = document.getElementsByClassName('updateForm')
 // const plantMain = document.getElementsByClassName('plantMain')
 
-Array.from(star).forEach(function(element) {
+
+
+
+Array.from(check).forEach(function(element) {
     element.addEventListener('click', function(){
   
-      const postObjectID = this.parentNode.parentNode.parentNode.id
+     
+      const postObjectID = this.parentNode.parentNode.parentNode.parentNode.id
       //console.log(`this ${postObjectID}`)
-      const star = this.parentNode.parentNode.id
+      const check = this.parentNode.parentNode.parentNode.id
+      // console.log('check complete?', check)
 
-      console.log('this',postObjectID)
+      // console.log('this',postObjectID)
       
-      if(star == 'true'){
+      if(check == 'true'){
         
-        fetch('removeStarred', {
+      
+        fetch('removeChecked', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -35,9 +41,9 @@ Array.from(star).forEach(function(element) {
           window.location.reload(true)
         })
       
-      }else if (star == 'false'){
+      }else if (check == 'false'){
          
-        fetch('addStarred', {
+        fetch('addChecked', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -59,9 +65,9 @@ Array.from(star).forEach(function(element) {
 
 Array.from(trash).forEach(function(element) {
     element.addEventListener('click', function(){
-      const postObjectID = this.parentNode.parentNode.parentNode.id
+      const postObjectID = this.parentNode.parentNode.parentNode.parentNode.id
   
-      fetch('deleteWorkoutPost', {
+      fetch('deleteOrder', {
         method: 'delete',
         headers: {
           'Content-Type': 'application/json'
@@ -101,8 +107,8 @@ Array.from(trash).forEach(function(element) {
 // // });
 
 // // Array.from(thumbDown).forEach(function(element) {
-// //   element.addEventListener('click', function(){
-// //     const name = this.parentNode.parentNode.childNodes[1].innerText
+  // //   element.addEventListener('click', function(){
+    // //     const name = this.parentNode.parentNode.childNodes[1].innerText
 // //     const msg = this.parentNode.parentNode.childNodes[3].innerText
 // //     const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
 // //     fetch('messagesTDown', {
@@ -125,23 +131,23 @@ Array.from(trash).forEach(function(element) {
 // // });
 
 
-// Array.from(trash).forEach(function(element) {
-//       element.addEventListener('click', function(){
-//         // const plantName = this.parentNode.parentNode.childNodes[1].innerText
-//         // const date = this.parentNode.parentNode.childNodes[3].innerText
-//         const theID = this.parentNode.parentNode.parentNode.id
-//         // console.log(plantName, date, theID)
 
-//         fetch('deletePlant', {
-//           method: 'delete',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify({
-//             'theID': theID
-//           })
-//         }).then(function (response) {
-//           window.location.reload()
-//         })
-//       });
-// });
+const synth = window.speechSynthesis;
+document.querySelector('#speak').addEventListener('click', run)
+
+function run() {
+  // const fName = document.querySelector('#firstName').value
+  // const fMidName = document.querySelector('#firstMiddle').value
+  // const lMidName = document.querySelector('#lastMiddle').value
+  // const lName = document.querySelector('#lastName').value
+
+  const customerName = document.getElementById('customerName').innerText 
+
+  const yellText =  `${customerName}`
+
+  //document.querySelector('#placeToYell').innerText = yellText
+
+  let yellThis = new SpeechSynthesisUtterance(yellText);
+
+  synth.speak(yellThis);
+}
