@@ -12,4 +12,4 @@
 
 Modified from Scotch.io's auth tutorial
 
-<img src="img/ppd.png" alt="project example" width="250" height="300">
+<img src="public/img/ppd.png" alt="project example" width="250" height="300">
