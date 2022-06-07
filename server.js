@@ -22,6 +22,7 @@ var bodyParser   = require('body-parser');//Newer versions of express, this is k
 var session      = require('express-session');//Handles user session while logged in and when logging off.
 
 var configDB = require('./config/database.js');//this is pulling from the object made in config.js file. It holds db url. Common way of calling files throughout program.
+const { dbName } = require('./config/database.js');
 
 var db
 
@@ -30,6 +31,7 @@ var db
 //2. Calls routes.js in require as a function. It's passing in the app, passport, db into route.js to be used.
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
+  console.log('conneced to', dbName)
   db = database //this db is coming from where the server just connected to.
   require('./app/routes.js')(app, passport, db);//again, (./app...) spits out a function and then (app, pass..) are the arguments being passed in.
 }); // connect to our database

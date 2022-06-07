@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/profile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 
 </head>
@@ -28,7 +29,7 @@
         <div class="col-sm-6">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
-
+<!-- render stuff if this user exist -->
                 <% if (user.local.email) { %>
                     <p>
                         <!-- <strong>id</strong>: <%= user._id %><br> -->
@@ -39,105 +40,107 @@
                     </p>
 
                     <a href="/unlink/local" class="btn btn-default">Unlink</a>
+
+                    <div class="log">
+                        <form id="entryPad" action="/log" method="POST">
+                        <h2>Write your thoughts here</h2>
+                        <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
+                            <div id="msg">
+                            <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
+                            </div>
+                            <fieldset>
+                                <legend>Current Emotion?</legend>
+                                <label for="Happy">Happy</label>
+                                <input required type="radio" name="emotion" id="tall" value="happy">
+    
+                                <label for="grande">Sad</label>
+                                <input type="radio" name="emotion" id="grande" value="sad">
+    
+                                <label for="venti">Angry</label>
+                                <input type="radio" name="emotion" id="venti" value="angry">
+    
+                                <label for="venti">Frightened</label>
+                                <input type="radio" name="emotion" id="venti" value="frightened">
+    
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>Stress Levels?</legend>
+    
+                                <label for="high">High</label>
+                                <input required type="radio" name="stressLevel" id="high" value="high">
+    
+                                <label for="medium">Medium</label>
+                                <input type="radio" name="stressLevel" id="medium" value="Medium">
+    
+                                <label for="low">Low</label>
+                                <input type="radio" name="stressLevel" id="low" value="low">
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>Harmful Thoughts?</legend>
+    
+                                <label>
+                                    Yes
+                                    <input required type="radio" name="harmful" value="Yes"></label>
+                                <label>
+                                    No
+                                    <input type="radio" name="harmful" value="No"></label>
+    
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>How Can You Be supported?</legend>
+                                
+                            <fieldset>
+                                <legend> Note:</legend>
+    
+                                <textarea name="note" placeholder="Note" cols="20" rows="5"></textarea>
+                            </fieldset>
+                            <label for="submit">
+                                <button type="submit">Share My Thoughts</button>
+                            </label>
+      
+    
+                        </form> 
+                        <h3> Mood Logger</h3>
+                    
+    
+                        <% console.log(journalEntries) %>
+                        <ul class="entries">
+                                <% for(let i=0; i<journalEntries.length; i++) {%>
+                                    <div>
+                                    <p class="hide"><%= journalEntries[i]._id %></p>
+                                    <p class="hide"><%= journalEntries[i].starred %></p>
+                                    <!-- rendering logentries -->
+                                    <% if (journalEntries[i].starred === true){ %>
+                                            <li style="color:pink"> <%=journalEntries[i].date %> </li>
+                                            <li style="color:pink"> <%=journalEntries[i].dailyPost %>
+                                            <li style="color:pink"><%= journalEntries[i].emotion %></li>
+                                            <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
+                                            <li style="color:pink"><%= journalEntries[i].harmful %></li>
+                                            <li style="color:pink"><%= journalEntries[i].note %></li>   
+                                            <span><i class="fa fa-star"></i></span> 
+                                            <span><i class="fa fa-trash"></i></span>                                 
+                                    <% } else { %>
+                                    <li style="color:black"> <%=journalEntries[i].date %> </li>
+                                    <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>
+                                    <span><i class="fa fa-star"></i></span> 
+                                    <span><i class="fa fa-trash"></i></span> 
+                                   <span><i class="fa-solid fa-star-shooting"></i></span>
+                                       <% }%>
+                                       <% console.log('this is ',journalEntries[i]) %>
+                                    </div>
+                                <% } %>
+                        </ul> 
+                    </div>
+
                 <% } else { %>
                     <a href="/connect/local" class="btn btn-default">Connect Local</a>
                 <% } %>
 
                 </div>
 
-                <div class="log">
-                    <form id="entryPad" action="/log" method="POST">
-                    <h2>Write your thoughts here</h2>
-                    <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
-                        <div id="msg">
-                        <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
-                        </div>
-                        <fieldset>
-                            <legend>Current Emotion?</legend>
-                            <label for="Happy">Happy</label>
-                            <input required type="radio" name="emotion" id="tall" value="happy">
-
-                            <label for="grande">Sad</label>
-                            <input type="radio" name="emotion" id="grande" value="sad">
-
-                            <label for="venti">Angry</label>
-                            <input type="radio" name="emotion" id="venti" value="angry">
-
-                            <label for="venti">Frightened</label>
-                            <input type="radio" name="emotion" id="venti" value="frightened">
-
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Stress Levels?</legend>
-
-                            <label for="high">High</label>
-                            <input required type="radio" name="stressLevel" id="high" value="high">
-
-                            <label for="medium">Medium</label>
-                            <input type="radio" name="stressLevel" id="medium" value="Medium">
-
-                            <label for="low">Low</label>
-                            <input type="radio" name="stressLevel" id="low" value="low">
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Harmful Thoughts?</legend>
-
-                            <label>
-                                Hot
-                                <input required type="radio" name="temperature" value="Hot"></label>
-                            <label>
-                                Iced
-                                <input type="radio" name="temperature" value="Iced"></label>
-
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>How Can You Be supported?</legend>
-                            
-                        <fieldset>
-                            <legend> Note:</legend>
-
-                            <textarea name="note" placeholder="Note" cols="20" rows="5"></textarea>
-                        </fieldset>
-                        <label for="submit">
-                            <button type="submit">Share My Thoughts</button>
-                        </label>
-  
-
-                    </form> 
-                </div>
-                    
-                    <h3> Mood Logger</h3>
-                    
-    
-                    <% console.log(journalEntries) %>
-                    <ul class="entries">
-                            <% for(var i=0; i<journalEntries.length; i++) {%>
-
-                                <% if (journalEntries[i].starred === true) { %>
-                                    <p style="color:pink"><%= journalEntries[i].date %></p>
-                                    <%}else { %>
-                                    <p> <%= journalEntries[i].date %></p>
-                                <% } %>
-
-
-
-                                    
-                                <% } %>
-                            <li class="message">
-                                
-                                <!-- <p style="color:"> <%= journalEntries[i].dailyPost %></p>
-                                <p style="color:<%= color%>"><%= journalEntries[i].date %></p> -->
-                                <p class="hidden"><%= journalEntries[i]._id %></p>
-                                    <button class="star"> STAR</button>
-                                    <button class="trash"> TRASH</button>
-                            </li>
-                            <% } %>
-                    </ul> 
-                
-                <section class="container text-center">
 
                     <!-- LOCAL INFORMATION -->
                 

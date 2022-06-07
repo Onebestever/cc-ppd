@@ -6,10 +6,14 @@
 ## Usage
 
 1. run `node server.js`
-2. Navigate to `localhost:8080`
+2. Navigate to `localhost:3030`
 
 ## Credit
+## Backgr
 
 Modified from Scotch.io's auth tutorial
 
 <img src="public/img/ppd.png" alt="project example" width="250" height="300">
+## Background
+
+Modified from Scotch.io's auth tutorial
