@@ -178,31 +178,41 @@ app.delete('/deleteOrder', (req, res) => {
   })
 })
 
-//Order System Routes ===============================================================
+//Chart Routes ===============================================================
 
-app.get('/orderSystem', function (req, res) {
-  res.render('orderSystem.ejs');
-});
+app.get('/chart', isLoggedIn, function (req, res) {
+  db.collection('journalEntries').find().toArray((err, journalEntries) => {
+    if (err) return console.log(err)
+    console.log('result', journalEntries)
+      let stressCount = [0,0,0,0,0,0,0] // sum of stress
+      let chartData = [0,0,0,0,0,0,0] // days of the week that take the value of stressLevel
+    //update find to filter out/
+    // let myWorkLogs = result.filter(doc => doc.name === req.user.local.email)
+    // console.log('myWorkLogs', myWorkLogs)
+    for(let i = 0; i < journalEntries.length; i++){
+      const d = new Date((new Date(journalEntries[i].date)).getTime()+ 12*60*60*1000) //12 hours * 60 mins * 60 secs * 1000 milliseconds <=
+      const dayOfWeek = d.getDay()
+      chartData[dayOfWeek]+= Number(journalEntries[i].stressLevel)
+      stressCount[dayOfWeek]++ //increse
+    }
+    console.log(chartData)
+    for(let i = 0; i < chartData.length; i++){
+      if(stressCount[i]>0){
+      chartData[i] = chartData[i]/stressCount[i]
+      }
+    }
 
-app.post('/submitOrder', (req, res) => {
-  db.collection('journalEntries')
-    .insertOne({
-      customerName: req.body.customerName,
-      size: req.body.size,
-      beverage: req.body.beverage,
-      temperature: req.body.temperature,
-      sugar: req.body.sugar,
-      flavor: req.body.flavor,
-      milkOptions: req.body.milkOptions,
-      note: req.body.note,
-      complete: false
-    }, (err, result) => {
-      if (err) return console.log(err)
-      //console.log(result)
-      console.log('saved to database')
-      res.redirect('/orderSystem')
+      console.log(chartData)
+      console.log(stressCount)
+
+    
+    res.render('chart.ejs', {
+      user: req.user,
+      journalEntries: journalEntries,
+      chartData: chartData
     })
-})
+  })
+});
 
 
 // =============================================================================
