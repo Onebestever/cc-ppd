@@ -12,7 +12,8 @@ const userSchema = mongoose.Schema({
         email        : String,
         password     : String,
         viewerType   : String,
-        viewers      :[String]
+        clientName   : String,
+        viewers      :[String] //click to add users into empty array using + & - button
     },
     facebook         : {
         id           : String,
