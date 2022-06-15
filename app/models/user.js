@@ -10,7 +10,9 @@ const userSchema = mongoose.Schema({
         firstName    : String,
         lastName     : String,
         email        : String,
-        password     : String
+        password     : String,
+        viewerType   : String,
+        viewers      :[String]
     },
     facebook         : {
         id           : String,

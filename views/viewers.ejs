@@ -1,38 +1,153 @@
 <!doctype html>
 <html>
-
 <head>
-    <title>21 Savage Fan Site</title>
+    <title>User Profile</title>
+   
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="style/profile.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/style.css">
 </head>
+<body id="profileLanding">
+<div class="containerLanding">
 
-<body>
-    <section class="container">
-        <section class="page-header text-center">
-            <h1>Orders Page</h1>
-            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-            <!-- <a href="/" class="btn btn-default btn-sm">Home</a> -->
-            <a href="/profile" class="btn btn-default btn-sm">Profile</a>
-        </section>
-    </section>
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/index" class="btn btn-default btn-sm">Home</a>
+        <a href="/viewers" class="btn btn-default btn-sm">Profile</a>
+    </div>
 
-    <section class="container text-center">
-                 
-                <li class="message">
-       
-                  <span><i class="fa fa-star" aria-hidden="true"></i></span>
-                  <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                </li>
-              <% } %>
-        </ul> 
-  
-    </section>
+    <div class="row">
 
-    <script src="/main.js"></script>
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+<!-- render stuff if this user exist -->
+                <% if (user.local.email) { %>
+                    <p>
+                        <!-- <strong>id</strong>: <%= user._id %><br> -->
+                        <strong>First Name</strong>: <%= user.local.firstName %><br>
+                        <strong>Last Name</strong>: <%= user.local.lastName %><br>
+                        <!-- <strong>email</strong>: <%= user.local.date %><br> -->
+                        <!-- <strong>password</strong>: <%= user.local.password %> -->
+                    </p>
+
+                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+
+                    <div class="log">
+                        <form id="entryPad" action="/log" method="POST">
+                        <h2>Write your thoughts here</h2>
+                        <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
+                            <div id="msg">
+                            <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
+                            </div>
+                            <fieldset>
+                                <legend>Current Emotion?</legend>
+                                <label for="Happy">Happy</label>
+                                <input required type="radio" name="emotion" id="tall" value="happy">
+    
+                                <label for="grande">Sad</label>
+                                <input type="radio" name="emotion" id="sad" value="sad">
+    
+                                <label for="venti">Angry</label>
+                                <input type="radio" name="emotion" id="angry" value="angry">
+    
+                                <label for="venti">Anxious</label>
+                                <input type="radio" name="emotion" id="anxious" value="anxious">
+    
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>Stress Levels?</legend>
+
+                                <label for="cars">What is your stress level today? 
+                                    1 being the lowest and 5 being the highest.:</label>
+                                    
+                                    <select id="levels" name="stressLevel">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                    </select>
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>Harmful Thoughts?</legend>
+    
+                                <label>
+                                    Yes
+                                    <input required type="radio" name="harmful" value="Yes"></label>
+                                <label>
+                                    No
+                                    <input type="radio" name="harmful" value="No"></label>
+    
+                            </fieldset>
+    
+                            <fieldset>
+                                <legend>How Can You Be supported?</legend>
+                                
+                            <fieldset>
+                                <legend> Note:</legend>
+    
+                                <textarea name="note" placeholder="Note" cols="20" rows="5"></textarea>
+                            </fieldset>
+                            <label for="submit">
+                                <button type="submit">Share My Thoughts</button>
+                            </label>
+      
+    
+                        </form> 
+                        <h3> Mood Logger</h3>
+                    
+    
+                        <% console.log(journalEntries) %>
+                        <ul class="entries">
+                                <% for(let i=0; i<journalEntries.length; i++) {%>
+                                    <div>
+                                    <p class="hide"><%= journalEntries[i]._id %></p>
+                                    <p class="hide"><%= journalEntries[i].starred %></p>
+                                    <!-- rendering logentries -->
+                                    <% if (journalEntries[i].starred === true){ %>
+                                            <li style="color:pink"> <%=journalEntries[i].date %> </li>
+                                            <li style="color:pink"> <%=journalEntries[i].dailyPost %>
+                                            <li style="color:pink"><%= journalEntries[i].emotion %></li>
+                                            <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
+                                            <li style="color:pink"><%= journalEntries[i].harmful %></li>
+                                            <li style="color:pink"><%= journalEntries[i].note %></li>   
+                                            <span><i class="fa fa-star"></i></span> 
+                                            <span><i class="fa fa-trash"></i></span>                                 
+                                    <% } else { %>
+                                    <li style="color:black"> <%=journalEntries[i].date %> </li>
+                                    <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>
+                                    <span><i class="fa fa-star"></i></span> 
+                                    <span><i class="fa fa-trash"></i></span> 
+                                   <span><i class="fa-solid fa-star-shooting"></i></span>
+                                       <% }%>
+                                       <% console.log('this is ',journalEntries[i]) %>
+                                    </div>
+                                <% } %>
+                        </ul> 
+                    </div>
+
+                <% } else { %>
+                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+                </div>
+
+
+                    <!-- LOCAL INFORMATION -->
+                
+
+<script src="main.js"></script>
 
 </body>
-
 </html>

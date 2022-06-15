@@ -1,39 +1,47 @@
 const user = require("./models/user");
 
+
 module.exports = function (app, passport, db) {
 
-const {
-  ObjectId
-} = require('mongodb') //gives access to _id in mongodb
-//Collection variable
-// normal routes ===============================================================
+  const {
+    ObjectId
+  } = require('mongodb') //gives access to _id in mongodb
+  //Collection variable
+  // normal routes ===============================================================
 
-// show the home page (will also have our login links)
-app.get('/', function (req, res) {
-  res.render('index.ejs');
-});
+  // show the home page (will also have our login links)
+  app.get('/', function (req, res) {
+    res.render('index.ejs');
+  });
 
 
 
-// PROFILE SECTION =========================
+  // PROFILE SECTION =========================
 
-app.get('/profile', isLoggedIn, function (req, res) {
-  db.collection('journalEntries').find().toArray((err, result) => {
-    console.log(req.user)
-    if (err) return console.log(err)
-    console.log(result)
+  app.get('/profile', isLoggedIn, async function (req, res) {
+    const journalEntries = await db.collection('journalEntries').find().toArray()
+    const allUsers = await db.collection('users').find().toArray()
+
 
 
     res.render('profile.ejs', {
 
       user: req.user,
-      'journalEntries': result,
-      allUsers: result
+      'journalEntries': journalEntries,
+      allUsers: allUsers //show all users with + & - buttons + make loop for all users
 
     })
   })
+};
+app.put('/addViewer',isLoggedIn, function (req, res) {
+ 
+ //look at req.body.user => push user into array so client can choose who can view => 
+ 
 });
-
+app.put('/removeViewer',isLoggedIn, function (req, res) {
+ 
+  //look at req.body.user => remove user from array 
+ });
 
 //VIEWERS LOGIN ////////
 app.get('/viewers', isLoggedIn, function (req, res) {
@@ -131,21 +139,22 @@ app.put('/addStar', (req, res) => {
   console.log(ObjectId(req.body.id))
   console.log('adding star')
   console.log('hey im the id ', req.body)
-    db.collection('journalEntries')
+  db.collection('journalEntries')
     .findOneAndUpdate({
-      _id: ObjectId(req.body. postObjectID),
+      _id: ObjectId(req.body.postObjectID),
     }, {
       $set: {
         starred: true,
       }
-    },
-     {
-      sort: {_id: -1}, //Sorts documents in db ascending (1) or descending (-1)
+    }, {
+      sort: {
+        _id: -1
+      }, //Sorts documents in db ascending (1) or descending (-1)
       // upsert: true
     }, (err, result) => {
       if (err) return res.send(err)
       res.send(result)
-  })
+    })
 })
 
 app.put('/removeStar', (req, res) => {
@@ -184,28 +193,28 @@ app.get('/chart', isLoggedIn, function (req, res) {
   db.collection('journalEntries').find().toArray((err, journalEntries) => {
     if (err) return console.log(err)
     console.log('result', journalEntries)
-      let stressCount = [0,0,0,0,0,0,0] // sum of stress
-      let chartData = [0,0,0,0,0,0,0] // days of the week that take the value of stressLevel
+    let stressCount = [0, 0, 0, 0, 0, 0, 0] // sum of stress
+    let chartData = [0, 0, 0, 0, 0, 0, 0] // days of the week that take the value of stressLevel
     //update find to filter out/
     // let myWorkLogs = result.filter(doc => doc.name === req.user.local.email)
     // console.log('myWorkLogs', myWorkLogs)
-    for(let i = 0; i < journalEntries.length; i++){
-      const d = new Date((new Date(journalEntries[i].date)).getTime()+ 12*60*60*1000) //12 hours * 60 mins * 60 secs * 1000 milliseconds <=
+    for (let i = 0; i < journalEntries.length; i++) {
+      const d = new Date((new Date(journalEntries[i].date)).getTime() + 12 * 60 * 60 * 1000) //12 hours * 60 mins * 60 secs * 1000 milliseconds <=
       const dayOfWeek = d.getDay()
-      chartData[dayOfWeek]+= Number(journalEntries[i].stressLevel)
+      chartData[dayOfWeek] += Number(journalEntries[i].stressLevel)
       stressCount[dayOfWeek]++ //increse
     }
     console.log(chartData)
-    for(let i = 0; i < chartData.length; i++){
-      if(stressCount[i]>0){
-      chartData[i] = chartData[i]/stressCount[i]
+    for (let i = 0; i < chartData.length; i++) {
+      if (stressCount[i] > 0) {
+        chartData[i] = chartData[i] / stressCount[i]
       }
     }
 
-      console.log(chartData)
-      console.log(stressCount)
+    console.log(chartData)
+    console.log(stressCount)
 
-    
+
     res.render('chart.ejs', {
       user: req.user,
       journalEntries: journalEntries,
@@ -245,10 +254,23 @@ app.get('/signup', function (req, res) {
 
 // process the signup form
 app.post('/signup', passport.authenticate('local-signup', {
-  successRedirect: '/profile', // redirect to the secure profile section
+  // successRedirect: '/profile', // redirect to the secure profile section
   failureRedirect: '/signup', // redirect back to the signup page if there is an error
   failureFlash: true // allow flash messages
-}));
+}), function (req, res) {
+  console.log('testing signup', req.body)
+
+  req.user.local.viewerType = req.body.viewerType //set user database to value from ejs
+  req.user.save()
+  console.log('thhis is the user ', req.user, req.body.viewerType)
+  if (req.body.viewerType === 'partner') {
+    res.redirect('/partner')
+  } else if (req.body.viewerType === 'client') {
+    res.redirect('/profile')
+  } else {
+    res.redirect('/viewers')
+  }
+});
 
 // =============================================================================
 // UNLINK ACCOUNTS =============================================================

@@ -9,7 +9,8 @@
 2. Navigate to `localhost:3030`
 
 ## Credit
-## Backgr
+## Background
+Post
 
 Modified from Scotch.io's auth tutorial
 
