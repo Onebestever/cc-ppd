@@ -1,5 +1,5 @@
 const user = require("./models/user");
-require('dotenv').config();
+// require('dotenv').config();
 
 
 module.exports = function (app, passport, db) {
@@ -46,13 +46,15 @@ module.exports = function (app, passport, db) {
 
       res.render('viewers.ejs', {
         user: req.user,
-        allUsers: result
+        'journalEntries': result,
+     
+        // allUsers: result
       })
     })
   });
 
 
-  //USER PROFILE
+  //viewer PROFILE
   app.get('/viewers', isLoggedIn, function (req, res) {
     db.collection('journalEntries').find().toArray((err, result) => {
       if (err) return console.log(err)
@@ -75,7 +77,34 @@ module.exports = function (app, passport, db) {
     res.redirect('/');
   });
 
+
+
+
+    // partners page Routes ===============================================================
+    app.get('/partner', isLoggedIn, async function (req, res) {
+      const results = db.collection('journalEntries').find().toArray((err, result) => {
+         console.log(req.user)
+         if (err) return console.log(err)
+         console.log(result)
+   
+   
+         res.render('partner.ejs', {
+   
+           user: req.user,
+           'journalEntries': result,
+          //  allUsers: result
+   
+         })
+       })
+     });
+
+   
+  // viewers Page Routes ================================================================
+  
+
   // viewers Page Routes ===============================================================
+
+
 
 
 
