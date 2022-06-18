@@ -10,8 +10,8 @@
 <div class="container">
 
     <div class="page-header text-center">
+        <h1>Page</h1>
         <a href="/profile">Profile</a>
-        <a href="/feed">Feed</a>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -19,17 +19,15 @@
 
        
         <div class="col-sm-6">
-          <h3>Journal Entries</h3>
+          <h3>Mood Logger</h3>
           <ul class="messages">
           <% for(var i=0; i<journalEntries.length; i++) {%>
             <li class="message">
-              <h4>Date:<%= journalEntries[i].date %></h4>
-              <h4>Stress Rate:<%= journalEntries[i].stressLevel %></h4>
-              <h4>Note:<%= journalEntries[i].note %></h4>
-                <h4>Emotion:<%= journalEntries[i].emotion %></h4>
-                  <h4>DailyPost:<%= journalEntries[i].dailyPost %></h4>
-              
-
+              <a href="/journalEntries/<%= journalEntries[i]._id %>">
+                <h4><%= journalEntries[i].date %></h4>
+                <img src="<%= journalEntries[i].img %>" alt="">
+                <a href="/page/<%= journalEntries[i].postedBy %>"></a>
+              </a>  
             </li>
           <% } %>
           </ul>

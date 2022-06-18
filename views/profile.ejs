@@ -30,29 +30,55 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     <div class="row">
+<!-- LOCAL INFORMATION -->
+<div class="col-sm-6">
+    <div class="well">
+        <h3><span class="fa fa-user"></span> Local</h3>
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-<!-- render stuff if this user exist -->
-                <% if (user.local.email) { %>
-                    <p>
-                        <!-- <strong>id</strong>: <%= user._id %><br> -->
-                        <strong>First Name</strong>: <%= user.local.firstName %><br>
-                        <strong>Last Name</strong>: <%= user.local.lastName %><br>
-                        <!-- <strong>email</strong>: <%= user.local.date %><br> -->
-                        <!-- <strong>password</strong>: <%= user.local.password %> -->
-                    </p>
+        <% if (user.local.email) { %>
+            <p>
+                <strong>First Name</strong>: <%= user.local.firstName %><br>
+                <strong>Last Name</strong>: <%= user.local.lastName %><br>
+            </p>
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+            <a href="/unlink/local" class="btn btn-default">Unlink</a>
+        <% } else { %>
+            <a href="/connect/local" class="btn btn-default">Connect Local</a>
+        <% } %>
 
-                    <div class="log">
-                        <form id="entryPad" action="/log" method="POST">
-                        <h2>Write your thoughts here</h2>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <h3>Mood Logs</h3>
+      <ul class="messages">
+      <% for(var i=0; i<journalEntries.length; i++) {%>
+        <li class="message">
+          <a href="/journalEntries/<%= journalEntries[i]._id %>">
+            <h4> Date: <%= journalEntries[i].date %></h4>
+          </a>  
+        </li>
+      <% } %>
+      </ul>
+    
+      <h2> Mood Logger</h2>
+    <% if (user.local.email) { %>
+      <form action="/log"  method="POST">
+  
+        <h2>Write your thoughts here</h2>
                         <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
                             <div id="msg">
                             <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
@@ -111,55 +137,11 @@
                             <label for="submit">
                                 <button type="submit">Share My Thoughts</button>
                             </label>
-      
-    
-                        </form> 
-                        <h3> Mood Logger</h3>
-                    
-    
-                        <% console.log(journalEntries) %>
-                        <ul class="entries">
-                                <% for(let i=0; i<journalEntries.length; i++) {%>
-                                    <div>
-                                    <p class="hide"><%= journalEntries[i]._id %></p>
-                                    <p class="hide"><%= journalEntries[i].starred %></p>
-                                    <!-- rendering logentries -->
-                                    <% if (journalEntries[i].starred === true){ %>
-                                            <li style="color:pink"> <%=journalEntries[i].date %> </li>
-                                            <li style="color:pink"> <%=journalEntries[i].dailyPost %>
-                                            <li style="color:pink"><%= journalEntries[i].emotion %></li>
-                                            <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
-                                            <li style="color:pink"><%= journalEntries[i].harmful %></li>
-                                            <li style="color:pink"><%= journalEntries[i].note %></li>   
-                                            <span><i class="fa fa-star"></i></span> 
-                                            <span><i class="fa fa-trash"></i></span>                                 
-                                    <% } else { %>
-                                    <li style="color:black"> <%=journalEntries[i].date %> </li>
-                                    <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>
-                                    <span><i class="fa fa-star"></i></span> 
-                                    <span><i class="fa fa-trash"></i></span> 
-                                   <span><i class="fa-solid fa-star-shooting"></i></span>
-                                       <% }%>
-                                       <% console.log('this is ',journalEntries[i]) %>
-                                    </div>
-                                <% } %>
-                        </ul> 
-                    </div>
-                            <div class="selectUser">
-                                
-
-                            </div>
-
-                    
-
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-                </div>
-
-
-                    <!-- LOCAL INFORMATION -->
+      </form>
+    </div>
+    <% } %>
+        <!-- LOCAL INFORMATION -->
+       
                 
 
 <script src="main.js"></script>

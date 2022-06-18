@@ -3,3 +3,6 @@
   color:#f3cd88;
  background-image: url('/Users/resilientcoders/Documents/rc2022A/week11/ppdCrudApp/public/img/thoughts.jpeg');
 }
+p.hide{
+  display: none;
+}

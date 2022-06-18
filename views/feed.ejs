@@ -18,13 +18,22 @@
     <div class="row">
 
        
-        <div class="col-sm-6">
-          <h3>journalEntries</h3>
+
           <ul class="messages">
-          <% for(var i=0; i<journalEntries.length; i++) {%>
-            <li class="entry"  <%= journalEntries[i].email %>  </li>
-          <% } %>
-          </ul>
+            <% for(var i=0; i<journalEntries.length; i++) {%>
+              <li class="message">
+                        Date:<%= journalEntries[i].date %>
+                        Stress Rate:<%= journalEntries[i].stressLevel %>
+                        DailyPost:<%= journalEntries[i].dailyPost %>
+                
+  
+              </li>
+            <% } %>
+            </ul>
+  
+  
+
+
 
 
 </div>
