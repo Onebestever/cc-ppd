@@ -12,15 +12,24 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 
+
 </head>
 <body id="profileLanding">
 <div class="containerLanding">
-
+    <i class="fa-solid fa-person-breastfeeding"></i>
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><span> <i class="fa-solid fa-person-breastfeeding"></i></span> Profile Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
         <a href="/viewers" class="btn btn-default btn-sm">Home</a>
         <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+        <a href="/relationship" class="btn btn-default btn-sm">Add Viewers</a>
+        <a href="/chart" class="btn btn-default btn-sm">View charts</a>
+        <a href="/feed" class="btn btn-default btn-sm">View feed</a>
+
+
+
+
+
     </div>
 
     <div class="row">
@@ -136,6 +145,12 @@
                                 <% } %>
                         </ul> 
                     </div>
+                            <div class="selectUser">
+                                
+
+                            </div>
+
+                    
 
                 <% } else { %>
                     <a href="/connect/local" class="btn btn-default">Connect Local</a>
