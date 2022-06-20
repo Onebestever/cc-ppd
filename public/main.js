@@ -1,14 +1,8 @@
 // // const thumbUp = document.getElementsByClassName("fa-thumbs-up");
-const check = document.getElementsByClassName("fa-star");
-const trash = document.getElementsByClassName("fa-trash");
-const customerName = document.getElementById('customerName') 
-console.log(trash)
-// const addCareBtn = document.getElementsByClassName('addCareBtn')
+const check = document.getElementsByClassName("fa-star");//UPDATE BUTTON
+const trash = document.getElementsByClassName("fa-trash");//DELETE BUTTON
 
-// const seeCareBtn = document.getElementsByClassName('seeCareBtn')
 
-// const updateForm = document.getElementsByClassName('updateForm')
-// const plantMain = document.getElementsByClassName('plantMain')
 
 Array.from(check).forEach(function(element) {
     element.addEventListener('click', function(){

@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>User Profile</title>
+    <title>Relationship</title>
    
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
@@ -15,7 +15,6 @@
 
 </head>
 <body id="addUser">
-
   <form >
     <h3>Add an email:</h3>
       <label for="email">Enter your email:</label>
@@ -25,6 +24,18 @@
 
 
         
+ <% console.log( 'this is all users', allUsers[0]) %> 
+ <% console.log( 'this addes from rekationships', allUsers[0]._id) %> 
+ <ul class="ListOfUsers">
+  <% for(var i=0; i < allUsers[0].relationship.length; i++) {%>
+    <li class="message">
+      <span> <%= allUsers.relationship[i].email %> </span>
+    </li>
+    <span><i class="fa fa-star"></i></span> 
+            <span><i class="fa fa-trash"></i></span> 
+            <span><%= i %></span>
+  <% } %>
+  </ul>
 
 
 

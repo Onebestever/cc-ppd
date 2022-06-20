@@ -18,7 +18,10 @@ module.exports = function (app, passport, db) {
 
 
 
+  app.get('/whoWeAre', function (req, res) {
 
+      res.render('whoWeAre.ejs')
+  });
 
 
 
@@ -65,15 +68,15 @@ app.get('/journalEntries/:ObjectId', isLoggedIn, function(req, res) {
 });
 
 
-app.get('/page/:id', isLoggedIn, function(req, res) {
-  let postId = ObjectId(req.params.id)
-  db.collection('journalEntries').find({postedBy: postId}).toArray((err, result) => {
-    if (err) return // console.log(err)
-    res.render('page.ejs', {
-      'journalEntries': result
-    })
-  })
-});
+// app.get('/page/:id', isLoggedIn, function(req, res) {
+//   let postId = ObjectId(req.params.id)
+//   db.collection('journalEntries').find({postedBy: postId}).toArray((err, result) => {
+//     if (err) return // console.log(err)
+//     res.render('page.ejs', {
+//       'journalEntries': result
+//     })
+//   })
+// });
 
 
 ///////////////POST ACTION/////////////////////////////////
@@ -138,14 +141,23 @@ app.post('/log',  (req, res) => {
   });
 
   //relationshipGET forclient to get to page //////////////////////////////////////
+  // db.collection.find({
+  //   "user": ObjectId("user_id"),
+  //   "relationship": ObjectId("")
+  // })
+
+
+
   app.get('/relationship', isLoggedIn, function (req, res) {
-    db.collection('users').find().toArray((err, result) => {
-      if (err) return // console.log(err)
-      // console.log('result', result)
+    console.log('carla hores', req.user)
+    db.collection('users').find({_id:ObjectId(req.user._id)}).toArray((err, result) => {
+      if (err) console.log(err)
+      console.log('result', result)
 
       res.render('relationship.ejs', {
         user: req.user,
-        orders: result
+        relationship: req.user.relationship,
+        allUsers: result
       })
     })
   });
@@ -166,26 +178,47 @@ app.post('/log',  (req, res) => {
       'local.email': req.user.local.email
     }, {
       $push: {
-        'relationship':req.body.email
+        'relationship': {
+          email: req.body.email,
+          isStarred: false
+        }
       } //to add to an array 'relationship'
     }, (err, result) => {
       if(err){
         console.log('ERROR',err)
-        return
       }
-      db.collection('users').findOneAndUpdate({
-        'local.email': req.body.email
+      res.send(result)
+    })
+  })
+
+  
+  app.put('/removeStar', (req, res) => {
+    // console.log('removing star')
+    db.collection('journalEntries')
+      .findOneAndUpdate({
+        _id: ObjectId(req.body.postObjectID)
       }, {
-        $push: {
-          'relationship':req.user.local.email
-        } //to add to an array 'relationship'
-      }, (err, result) => {
-        if(err){
-          console.log('ERROR', err)
-          return
+        $set: {
+          starred: false,
         }
-        return // send respone
+      }, {
+        sort: {
+          _id: -1
+        }, //Sorts documents in db ascending (1) or descending (-1)
+        // upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
       })
+  })
+
+
+  app.delete('/deleteOrder', (req, res) => {
+    db.collection('journalEntries').findOneAndDelete({
+      _id: ObjectId(req.body.postObjectID)
+    }, (err, result) => {
+      if (err) return res.send(500, err)
+      res.send('Message deleted!')
     })
   })
 
@@ -432,3 +465,56 @@ function isLoggedIn(req, res, next) {
 
   res.redirect('/');
 }
+
+
+
+
+
+// app.put('/addUser', (req, res) => {
+//   // console.log('removing star')
+//   db.collection('users').findOneAndUpdate({
+//     'local.email': req.user.local.email
+//   }, {
+//     $set: {
+//       starred: true,
+//     }
+//   }, {
+//     sort: {
+//       _id: -1
+//     }, //Sorts documents in db ascending (1) or descending (-1)
+//     // upsert: true
+//   }, (err, result) => {
+//     if (err) return res.send(err)
+//     res.send(result)
+//   })
+// })
+
+
+// app.put('/removeUser', (req, res) => {
+//   // console.log('removing star')
+//   db.collection('users').findOneAndUpdate({
+//     'local.email': req.user.local.email
+//   },  {
+//     $set: {
+//       starred: false,
+//     }
+//   }, {
+//     sort: {
+//       _id: -1
+//     }, //Sorts documents in db ascending (1) or descending (-1)
+//     // upsert: true
+//   }, (err, result) => {
+//     if (err) return res.send(err)
+//     res.send(result)
+//   })
+// })
+
+
+// app.delete('/deleteUser', (req, res) => {
+//   db.collection('journalEntries').findOneAndDelete({
+//     _id: ObjectId(req.body.postObjectID)
+//   }, (err, result) => {
+//     if (err) return res.send(500, err)
+//     res.send('Message deleted!')
+//   })
+// })

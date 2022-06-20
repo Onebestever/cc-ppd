@@ -1,15 +1,127 @@
-/* 
-#indexLanding{
-  background-image: url(img/popCorn.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
-#indexLanding h1,body{
-  font-family: 'Fredericka the Great', cursive;
-  color:#f3cd88;
-  background-image: url(img/index.gif);
-  background-repeat: no-repeat;
-  background-size: cover;
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
 }
-/* .jumbotron{ */
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.logo {
+  float: left;
+}
+
+#flowerButton{
+  /* background-image: url('solar.jpg'); */
+  background-size: cover;
+  width: fit-content;
+  color: black;
+  border: 1px solid transparent
+}
+
+button{
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+header {
+  border: 2px solid black;
+  width: 100%;
+  height: 20 rem;
+  background-color: rgb(35, 31, 32);
+  color: white;
+  text-align: center;
+  /* background-image: url('/img/sunset.gif'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+.ladySmiling {
+  border: 2px solid black;
+  width: 100%;
+  height: 100%;
+  background-image: url('/img/indexMain.jpg');
+  background-size: contain;
+  height: 35rem;
+  background-repeat: no-repeat;
+}
+
+.bottomBox {
+  border: 2px solid black;
+  width: 100%;
+  height: 17rem;
+  color: white;
+  background-color: rgb(35, 31, 32);
+}
+ul {
+  
+  list-style-type: none;
+}
+
+
+ul li {
+  /* margin-right: 40px; */
+  color: lightgray;
+  float: left;
+}
+.fa-chevron-down {
+  margin-left: 10px;
+}
+.words {
+  background: #ffffffc7;
+  width: 400px;
+  font-size: 30px;
+  float: right;
+  margin-top: 290px;
+  margin-right: 25px;
+  padding: 10px;
+}
+.img {
+  
+  width: 38%;
+  margin-left: 15%;
+  float: left;
+}
+.im,rightP{
+  width: 50%;
+}
+.title {
+  margin-right: -28%;
+  padding-right: 30rem;
+  display: -webkit-box;
+
+}
+.rightSpan {
+  color:rgba(132,160,216,255);
+  margin-right: 40px;
+}
+.leftSpan {
+  color:rgba(186,185,189,255);
+}
+
+header img {
+  margin-left: 60px;
+}
+.ad{
+  width: 90%;
+  padding:4% 4% 4% 30%
+}
+
+
+
+
+
+
+
