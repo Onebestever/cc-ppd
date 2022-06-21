@@ -13,12 +13,15 @@
   height: 0;
 }
 
-.clear {
-  clear: both;
+body{
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.logo {
-  float: left;
+
+
+.clear {
+  clear: both;
 }
 
 #flowerButton{
@@ -35,8 +38,9 @@ button{
 }
 header {
   border: 2px solid black;
+  border-bottom-style: none;
   width: 100%;
-  height: 20 rem;
+  height: 40 rem;
   background-color: rgb(35, 31, 32);
   color: white;
   text-align: center;
@@ -46,56 +50,78 @@ header {
   background-position: center;
 }
 
-
+h1,h2{
+   /* background: #ffffffc7; */
+    background: #febdab;
+    width: 182px;
+}
 
 .ladySmiling {
-  border: 2px solid black;
-  width: 100%;
+  width: 36%;
   height: 100%;
   background-image: url('/img/whoWeAreMain.JPG');
   background-size: contain;
   height: 35rem;
   background-repeat: no-repeat;
 }
+.bio{
+  width: 64%;
+}
+
+.first-TopPic img{
+  width: 43%;
+  float: left;
+}
+.bottom-TopPic img{
+float: right;
+width: 43%;
+}
+
 
 .bottomBox {
   border: 2px solid black;
   width: 100%;
-  height: 17rem;
+  height: 9rem;
   color: white;
-  background-color: rgb(35, 31, 32);
+  background-color:#7f4a33;
 }
 ul {
   
   list-style-type: none;
+  text-decoration: none;
 }
 
+.fa-leaf {
+      /* background-color: #febdab; */
+      font-weight: bold;
+      float: left;
+      margin: 4% 8% 1% 0%;
+      background-color: #febdab;
 
-ul li {
+  }
+
+
+
+ ul li  {
   /* margin-right: 40px; */
-  color: lightgray;
-  float: left;
+  
+  color: #474e21;
+  text-decoration: none;
+
 }
 .fa-chevron-down {
   margin-left: 10px;
 }
 .words {
-  background: #ffffffc7;
-  width: 400px;
-  font-size: 30px;
-  float: right;
-  margin-top: 290px;
-  margin-right: 25px;
-  padding: 10px;
+  /* background: #ffffffc7; */
+  background:#febdab ;
+  width: 182px;
+  font-size: 20px;
 }
 .img {
   
   width: 38%;
   margin-left: 15%;
-  float: left;
-}
-.im,rightP{
-  width: 50%;
 }
 .title {
   margin-right: -28%;

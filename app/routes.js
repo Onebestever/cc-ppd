@@ -82,13 +82,14 @@ app.get('/journalEntries/:ObjectId', isLoggedIn, function(req, res) {
 ///////////////POST ACTION/////////////////////////////////
 app.post('/log',  (req, res) => {
   let user = ObjectId(req.user._id)
-  // console.log(req.body)
+  console.log('HELLOOOOOO ITS ME',req.body)
   db.collection('journalEntries').insertOne({
     dailyPost: req.body.dailyPost,
     date: req.body.date,
     emotion: req.body.emotion,
     stressLevel: req.body.stressLevel,
     harmful: req.body.harmful,
+    email: req.body.email,
     note: req.body.note,
     starred: false,
     postedBy: user
@@ -244,8 +245,14 @@ app.post('/log',  (req, res) => {
   // feed Page Routes ================================================================
 
   app.get('/feed', isLoggedIn, async function (req, res) {
-    db.collection('journalEntries').find().toArray((err, result) => {
-      // console.log(req.user)
+    const allUsers = await db.collection('users').find().toArray()
+    console.log('THIS IS ALL USERS', allUsers)
+    const allowedUsers = allUsers.filter(user=> user.relationship.find(r=>r.email=== req.user.local.email))
+    console.log('THIS IS ALLOWED USERS', allowedUsers)
+    const allowedEmails = allowedUsers.map(user => user.local.email) // list of all emails ppl given permison to see stuff
+
+    db.collection('journalEntries').find({email:{'$in': allowedEmails}}).toArray((err, result) => {
+      console.log(req.user) // ask mongo for all journal entries of ppl who have allowed us to see them 
       if (err) return // console.log(err)
       // console.log('this is the result', result.body)
 
@@ -388,7 +395,63 @@ app.post('/log',  (req, res) => {
       })
     })
   });
+  ////////////////aADD USER TO RELATIONSHIP/////////////////////////////////////
+  app.put('/starStatus', (req, res) => {
+    // console.log('this is startStatus',req.body) // how we get to the index
+    const index = Number(req.body.indexOfRelationship)
+    db.collection('users').find({_id:ObjectId(req.user._id)}).toArray((err, result) => {
+      if (err) console.log(err)
+      // console.log('userReults', result[0].relationship)
+      result[0].relationship[index].isStarred = req.body.isStarred ? false : true //condtional for boolean 
+      // console.log('userResults Updated', result[0].relationship)
+      db.collection('users').findOneAndUpdate({
+        _id: ObjectId(req.user._id)
+      },  {
+        $set: {
+          relationship: result[0].relationship,
 
+        }
+      }, {
+        sort: {
+          _id: -1
+        }, //Sorts documents in db ascending (1) or descending (-1)
+        // upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/relationship')
+      })
+      
+    })
+    
+  })
+
+  app.put('/deleteRelationship', (req, res) => {
+    // console.log('this is startStatus',req.body) // how we get to the index
+    const index = Number(req.body.indexOfRelationship)
+    db.collection('users').find({_id:ObjectId(req.user._id)}).toArray((err, result) => {
+      if (err) console.log(err)
+      // console.log('userReults', result[0].relationship)
+      result[0].relationship.splice(index, 1) //remove 1 from th index
+      // console.log('userResults Updated', result[0].relationship)
+      db.collection('users').findOneAndUpdate({
+        _id: ObjectId(req.user._id)
+      },  {
+        $set: {
+          relationship: result[0].relationship,
+        }
+      }, {
+        sort: {
+          _id: -1
+        }, //Sorts documents in db ascending (1) or descending (-1)
+        // upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/relationship')
+      })
+      
+    })
+    
+  })
 
   // =============================================================================
   // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -490,24 +553,7 @@ function isLoggedIn(req, res, next) {
 // })
 
 
-// app.put('/removeUser', (req, res) => {
-//   // console.log('removing star')
-//   db.collection('users').findOneAndUpdate({
-//     'local.email': req.user.local.email
-//   },  {
-//     $set: {
-//       starred: false,
-//     }
-//   }, {
-//     sort: {
-//       _id: -1
-//     }, //Sorts documents in db ascending (1) or descending (-1)
-//     // upsert: true
-//   }, (err, result) => {
-//     if (err) return res.send(err)
-//     res.send(result)
-//   })
-// })
+
 
 
 // app.delete('/deleteUser', (req, res) => {

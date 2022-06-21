@@ -83,6 +83,8 @@
   
         <h2>Write your thoughts here</h2>
                         <input type="date" placeholder="date" name="date" class="inputMan" required pattern="\d{4}-\d{2}-\d{2}">
+                        <input value="<%= user.local.email %>" type="email" placeholder="email" name="email" hidden>
+
                             <div id="msg">
                             <textarea name="dailyPost" id="dailyPost"cols="100" rows="10" ></textarea>
                             </div>

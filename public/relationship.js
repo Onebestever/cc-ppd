@@ -25,20 +25,28 @@ const trash = document.getElementsByClassName("fa-trash");//DELETE BUTTON
 
 Array.from(check).forEach(function(element) {
     element.addEventListener('click', function(){
+      let isItStarred = element.dataset.userisstarred
+      // console.log(isItStarred)
+      const userIndex = element.dataset.index
+      // console.log(userIndex)
+
+      let myBool = (isItStarred.toLowerCase() === 'true'); 
+      // console.log(typeof myBool)
+      const emailIndex = myBool
   
-      const emailIndex = this.parentNode.parentNode.childNodes[7].innerHTML
-      const check = this.parentNode.parentNode.childNodes[3].innerHTML
+      // const emailIndex = this.parentNode.parentNode.childNodes[7].innerHTML
       console.log(emailIndex)
       //console.log(`this ${postObjectID}`)
       // console.log('check complete?', check)
       // console.log('this',postObjectID)
       
-      if(check == 'true'){
-        fetch('removeUser', {
+      
+        fetch('starStatus', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            'postObjectID': postObjectID
+            'isStarred': myBool,
+            'indexOfRelationship': userIndex
           })
         })
         .then(response => {
@@ -48,35 +56,19 @@ Array.from(check).forEach(function(element) {
           //console.log(data)
           window.location.reload(true)
         })     
-      }else if (check == 'false'){
-        fetch('addUser', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            'postObjectID': postObjectID
-          })
-        })
-        .then(response => {
-          if (response.ok) return response.json()
-        })
-        .then(data => {
-          console.log(data)
-          window.location.reload(true)
-        })
-      }
     });
 });
  
 Array.from(trash).forEach(function(element) {
+  const userIndex = element.dataset.index
   element.addEventListener('click', function(){
-    const postObjectID = this.parentNode.parentNode.childNodes[1].innerHTML
-    fetch('deleteUser', {
-      method: 'delete',
+    fetch('deleteRelationship', {
+      method: 'put',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'postObjectID':postObjectID
+      'indexOfRelationship': userIndex
       })
     }).then(function (response) {
       window.location.reload()
