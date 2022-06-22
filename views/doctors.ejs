@@ -13,11 +13,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 
 </head>
-<body id="partnerPage">
+<body id="viewersPage">
 <div class="containerLanding">
 
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Partner Page</h1>
+        <h1><span class="fa fa-anchor"></span> Doctor Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
         <a href="/" class="btn btn-default btn-sm">Home</a>
         <a href="/profile" class="btn btn-default btn-sm">Profile</a>
@@ -46,18 +46,31 @@
 
                     <div class="logs">
     
-             
-          <ul class="ToDoList">
-            <% for(var i=0; i<toDoList.length; i++) {%>
-              <li class="message">
-                        Date:<%= toDoList[i].date %>
-                        Task:<%= toDoList[i].chore %>
-                        DailyPost:<%= toDoList[i].user %>
-                
-  
-              </li>
-            <% } %>
-            </ul>
+                        <% console.log(journalEntries) %>
+                        <ul class="entries">
+                                <% for(let i=0; i<journalEntries.length; i++) {%>
+                                    <div>
+                                    <p class="hide"><%= journalEntries[i]._id %></p>
+                                    <p class="hide"><%= journalEntries[i].starred %></p>
+                                    <!-- rendering logentries -->
+                                    <% if (journalEntries[i].starred === true){ %>
+                                            <li style="color:pink"> <%=journalEntries[i].date %> </li>
+                                            <li style="color:pink"> <%=journalEntries[i].dailyPost %>
+                                            <li style="color:pink"><%= journalEntries[i].emotion %></li>
+                                            <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
+                                            <li style="color:pink"><%= journalEntries[i].harmful %></li>
+                                            <li style="color:pink"><%= journalEntries[i].note %></li>   
+                                            <span><i class="fa fa-star"></i></span>                               
+                                    <% } else { %>
+                                    <li style="color:black"> <%=journalEntries[i].date %> </li>
+                                    <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>
+                                    <span><i class="fa fa-star"></i></span> 
+                                    <span><i class="fa fa-trash"></i></span> 
+                                   <span><i class="fa-solid fa-star-shooting"></i></span>
+                                       <% }%>
+                                       <% console.log('this is ',journalEntries[i]) %>
+                                    </div>
+                                <% } %>
                         </ul> 
                     </div>
                     <% } else { %>

@@ -17,16 +17,12 @@
   clear: both;
 }
 
-.logo {
-  float: left;
-}
 
-#flowerButton{
-  /* background-image: url('solar.jpg'); */
-  background-size: cover;
-  width: fit-content;
-  color: black;
-  border: 1px solid transparent
+
+body{
+  font-family: 'Fredericka the Great', cursive;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 button{
@@ -34,59 +30,114 @@ button{
   border: 1px solid transparent;
 }
 header {
-  border: 2px solid black;
   width: 100%;
-  height: 20 rem;
-  background-color: rgb(35, 31, 32);
-  color: white;
+  height: 10rem;
+  color: rgb(35, 31, 32);
+  background-color: #231f20;
   text-align: center;
   /* background-image: url('/img/sunset.gif'); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
+nav{
+
+}
+li {
+  
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.fa-leaf {
+          /* background-color: #febdab; */
+    font-weight: bold;
+    float: left;
+    /* margin: 4% 8% 1% 0%; */
+    /* background-color: #ffffff; */
+    padding: 1% 2% 0% 1%;
+}
 
 
 
+ ul li  {
+  /* margin-right: 40px; */
+  
+  color: white;
+  text-decoration: none;
+}
+
+  h1{
+    width: 100%;
+    text-align: center;
+    color: #f4788d;
+    text-shadow: 2px 2px white;
+    font-size: 2.5rem;
+
+} 
+  
+h2{
+  /* background-color: #f4a73f; */
+  text-align: center;
+  color: #f4788d;
+  text-shadow: 2px 2px white;
+} 
+  .logo{
+    width: 15%;
+    
+  }
+  
+.h1Logo{
+  display: flex;
+  flex-wrap: nowrap;
+}
 .ladySmiling {
-  border: 2px solid black;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 20rem;
   background-image: url('/img/indexMain.jpg');
-  background-size: contain;
+  background-size: cover;
   height: 35rem;
   background-repeat: no-repeat;
 }
+.bio{
+  width: 50%;
+      display: flex;
+    flex-wrap: wrap;
+    background-size: contain;
+    height: 35rem;
+    background-repeat: no-repeat;
 
+}
 .bottomBox {
   border: 2px solid black;
   width: 100%;
-  height: 17rem;
+  height: 9rem;
   color: white;
   background-color: rgb(35, 31, 32);
 }
-ul {
-  
-  list-style-type: none;
-}
 
 
-ul li {
-  /* margin-right: 40px; */
-  color: lightgray;
-  float: left;
-}
-.fa-chevron-down {
-  margin-left: 10px;
-}
 .words {
-  background: #ffffffc7;
-  width: 400px;
-  font-size: 30px;
-  float: right;
-  margin-top: 290px;
-  margin-right: 25px;
-  padding: 10px;
+  /* background: #ffffffc7; */
+    background: #ffffffc7;
+    background-image: url(/img/birds.gif);
+    background-size: cover;
+    width: 100%;
+    font-size: 30px;
+    float: right;
+}
+
+
+first-TopPic{
+  width: 50%;
+  height: 5rem;
+}
+
+.talkingGirlsGif{
+  width: 100%;
+  /* box-shadow: 0 0 8px 8px #460605;
+  background-color: #763b1d;
+  padding: 1% 1% 1% 1%; */
 }
 .img {
   
@@ -94,8 +145,9 @@ ul li {
   margin-left: 15%;
   float: left;
 }
-.im,rightP{
-  width: 50%;
+p{
+  width: 100%;
+    text-align: center;
 }
 .title {
   margin-right: -28%;
@@ -111,9 +163,7 @@ ul li {
   color:rgba(186,185,189,255);
 }
 
-header img {
-  margin-left: 60px;
-}
+
 .ad{
   width: 90%;
   padding:4% 4% 4% 30%

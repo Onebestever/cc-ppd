@@ -1,10 +1,16 @@
 
 const user = require("./models/user");
-// require('dotenv').config();
 
 
-module.exports = function (app, passport, db) {
 
+//////////////////
+module.exports = function (app, passport, db ) {
+  require('dotenv').config();
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+  console.log(accountSid, authToken)
+  const client = require('twilio')(accountSid, authToken);
+  
   const {
     ObjectId
   } = require('mongodb') //gives access to _id in mongodb
@@ -25,28 +31,61 @@ module.exports = function (app, passport, db) {
 
 
 
-  // PROFILE SECTION =========================
-
-
 
 
 
   // PROFILE SECTION =========================
 
   app.get('/profile', isLoggedIn, function(req, res) {
+    if(req.user.local.viewerType === 'partner'){
+      res.redirect('/partner')
+    // } else if (req.user.local.viewerType === 'client') {
+    //    res.redirect('/client')
+    // } else if( req.user.local.viewerType === 'doctor') {
+    //    res.redirect('/doctor')
+    // } else if (req.user.local.viewerType === 'lovedOne') {
+    //    res.redirect('/lovedOne')
+    // } 
+    // else{
+    //   res.redirect('/')
+    }
     db.collection('journalEntries').find({postedBy: req.user._id}).toArray((err, result) => {
       // console.log('this is the first',req.user, 
       // 'this is the specific one', req.user._id, 
       // 'this is the whole thing', result, 'this is the post',)
 
       if (err) return // console.log(err)
-      res.render('profile.ejs', {
+      let page 
+     if( req.user.local.viewerType === 'partner') {
+        page = "partner.ejs"
+      } else if (req.user.local.viewerType === 'client') {
+        page = "profile.ejs"
+      } else if( req.user.local.viewerType === 'doctor') {
+        page = "doctors.ejs"
+      } else if (req.user.local.viewerType === 'lovedOne') {
+        page = "viewers.ejs"
+      } 
+      res.render(  `${page}`, {
        
         user: req.user,
-        'journalEntries': result
+        'journalEntries': result,
+        'toDoList': result
+
       })
     })
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/journalEntries/:ObjectId', isLoggedIn, function(req, res) {
   // console.log('this is objectId',ObjectId)
@@ -100,6 +139,20 @@ app.post('/log',  (req, res) => {
     res.redirect('/profile')
   })
 })
+/////////////////////sends messages TWILIO///////////////////////////////////////////////////
+app.post('/sendSms',  (req, res) => {
+  let phoneNumber = '+16178990622'
+  client.messages
+  .create({
+     body: 'This is a test text',
+     from: process.env.TWILIO_PHONE_NUMBER,
+     to: phoneNumber
+   })
+  .then(message => console.log('THISISI THE MESSAGE OBJECT',message));
+  
+})
+
+
 
   //VIEWERS LOGIN ////////
   app.get('/viewers', isLoggedIn, function (req, res) {
@@ -119,21 +172,7 @@ app.post('/log',  (req, res) => {
 
 
   //viewer PROFILE
-  app.get('/viewers', isLoggedIn, function (req, res) {
-    db.collection('journalEntries').find().toArray((err, result) => {
-      if (err) return // console.log(err)
-      // console.log('result', result)
 
-      //update find to filter out/
-      // let myWorkLogs = result.filter(doc => doc.name === req.user.local.email)
-      // // console.log('myWorkLogs', myWorkLogs)
-
-      res.render('viewers.ejs', {
-        user: req.user,
-        orders: result
-      })
-    })
-  });
 
   // LOGOUT ==============================
   app.get('/logout', function (req, res) {
@@ -225,7 +264,7 @@ app.post('/log',  (req, res) => {
 
   // partners page Routes ===============================================================
   app.get('/partner', isLoggedIn, async function (req, res) {
-    const results = db.collection('journalEntries').find().toArray((err, result) => {
+    const results = db.collection('toDoList').find().toArray((err, result) => {
       // console.log(req.user)
       if (err) return // console.log(err)
       // console.log(result)
@@ -234,15 +273,31 @@ app.post('/log',  (req, res) => {
       res.render('partner.ejs', {
 
         user: req.user,
-        'journalEntries': result,
-        allUsers: results
-
+        toDoList: result
       })
     })
+   
   });
 
+  // PROFILE client add to do list SECTION =========================
 
-  // feed Page Routes ================================================================
+  app.post('/toDoListAdd',  (req, res) => {
+    let user = ObjectId(req.user._id)
+    console.log('HELLOOOOOO ITS ME',req.body)
+    db.collection('toDoList').insertOne({
+      chore: req.body.chore,
+      date: req.body.date,
+      // postedBy: user
+    }, (err, result) => {
+      if (err) return // console.log(err)
+      //// console.log(result)
+      // console.log('saved to database')
+      res.redirect('/profile')
+    })
+  })
+  
+
+  // feed Page Routes for allowed  ================================================================
 
   app.get('/feed', isLoggedIn, async function (req, res) {
     const allUsers = await db.collection('users').find().toArray()
@@ -250,6 +305,7 @@ app.post('/log',  (req, res) => {
     const allowedUsers = allUsers.filter(user=> user.relationship.find(r=>r.email=== req.user.local.email))
     console.log('THIS IS ALLOWED USERS', allowedUsers)
     const allowedEmails = allowedUsers.map(user => user.local.email) // list of all emails ppl given permison to see stuff
+    console.log('WE ARE LOOKING FOR YOU',allowedEmails)
 
     db.collection('journalEntries').find({email:{'$in': allowedEmails}}).toArray((err, result) => {
       console.log(req.user) // ask mongo for all journal entries of ppl who have allowed us to see them 

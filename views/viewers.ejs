@@ -14,13 +14,15 @@
 
 </head>
 <body id="viewersPage">
-<div class="containerLanding">
+<!-- <div class="containerLanding"> -->
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Viewers Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        <a href="/viewers" class="btn btn-default btn-sm">Home</a>
+        <a href="/" class="btn btn-default btn-sm">Home</a>
         <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+        <a href="/relationship" class="btn btn-default btn-sm">Add Viewers</a>
+        <a href="/feed" class="btn btn-default btn-sm">View feed</a>
     </div>
 
     <div class="row">
@@ -57,8 +59,7 @@
                                             <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
                                             <li style="color:pink"><%= journalEntries[i].harmful %></li>
                                             <li style="color:pink"><%= journalEntries[i].note %></li>   
-                                            <span><i class="fa fa-star"></i></span> 
-                                            <span><i class="fa fa-trash"></i></span>                                 
+                                            <span><i class="fa fa-star"></i></span>                               
                                     <% } else { %>
                                     <li style="color:black"> <%=journalEntries[i].date %> </li>
                                     <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>

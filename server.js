@@ -4,6 +4,7 @@
 // get all the tools we need
 //All of these files are helping to build up separation of concerns so that its easier to track its parts.
 var express  = require('express');
+require('dotenv').config();
 var app      = express();
 var port     = process.env.PORT || 4000;//port is here in case Heroku wants to use a diff port
 

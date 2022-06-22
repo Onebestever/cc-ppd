@@ -14,6 +14,8 @@
 }
 
 body{
+  font-family: 'Fredericka the Great', cursive;
+
   display: flex;
   flex-wrap: wrap;
 }
@@ -49,7 +51,10 @@ header {
   background-repeat: no-repeat;
   background-position: center;
 }
-
+h1{
+  margin: auto;
+  width: 400px;
+}
 h1,h2{
    /* background: #ffffffc7; */
     background: #febdab;
@@ -92,12 +97,12 @@ ul {
 }
 
 .fa-leaf {
-      /* background-color: #febdab; */
-      font-weight: bold;
-      float: left;
-      margin: 4% 8% 1% 0%;
-      background-color: #febdab;
-
+       /* background-color: #febdab; */
+       font-weight: bold;
+       float: left;
+       /* margin: 4% 8% 1% 0%; */
+       background-color: #febdab;
+       padding: 1% 2% 0% 1%;
   }
 
 

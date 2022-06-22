@@ -1,8 +1,160 @@
+
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
 #profileLanding h1,body{
   font-family: 'Fredericka the Great', cursive;
-  color:#f3cd88;
- background-image: url('/Users/resilientcoders/Documents/rc2022A/week11/ppdCrudApp/public/img/thoughts.jpeg');
+  color:#fef4e7;
 }
 p.hide{
   display: none;
 }
+body{
+  background-image: url('/img/profileBack.jpg');
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-direction: column;
+
+}
+header { 
+  width: 100%;
+  height: 40 rem;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+h1{
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+h1,h2{
+   /* background: #ffffffc7; */
+    background: #febdab;
+    width: 182px;
+}
+
+.ladySmiling {
+  width: 36%;
+  height: 100%;
+  background-image: url('/img/whoWeAreMain.JPG');
+  background-size: contain;
+  height: 35rem;
+  background-repeat: no-repeat;
+}
+.bio{
+  width: 64%;
+}
+
+.first-TopPic img{
+  width: 43%;
+  float: left;
+}
+.bottom-TopPic img{
+float: right;
+width: 43%;
+}
+
+.-pinkBack{
+  background-color: #febdab;
+  text-align: center;
+}
+  
+
+.bottomBox {
+  border: 2px solid black;
+  width: 100%;
+  height: 9rem;
+  color: white;
+  background-color:#7f4a33;
+}
+ul {
+  
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.fa-leaf {
+       /* background-color: #febdab; */
+       font-weight: bold;
+       float: left;
+       /* margin: 4% 8% 1% 0%; */
+       background-color: #febdab;
+       padding: 1% 2% 0% 1%;
+  }
+
+
+
+ ul li  {
+  /* margin-right: 40px; */
+  
+  color: #474e21;
+  text-decoration: none;
+
+}
+.fa-chevron-down {
+  margin-left: 10px;
+}
+.words {
+  /* background: #ffffffc7; */
+    background: #ffffffc7;
+    background-image: url(/img/birds.gif);
+    background-size: contain;
+    /* background-repeat: no-repeat; */
+    width: 100%;
+    font-size: 30px;
+    float: right;
+}
+
+
+
+.talkingGirlsGif{
+  width: 100%;
+  box-shadow: 0 0 8px 8px #f0b322;
+  background-color: #efb532;
+  padding: 1% 1% 1% 1%;
+}
+
+
+.img {
+  
+  width: 38%;
+  margin-left: 15%;
+}
+.title {
+  margin-right: -28%;
+  padding-right: 30rem;
+  display: -webkit-box;
+
+}
+.rightSpan {
+  color:rgba(132,160,216,255);
+  margin-right: 40px;
+}
+.leftSpan {
+  color:rgba(186,185,189,255);
+}
+
+header img {
+  margin-left: 60px;
+}
+.ad{
+  width: 90%;
+  padding:4% 4% 4% 30%
+}
+
+
