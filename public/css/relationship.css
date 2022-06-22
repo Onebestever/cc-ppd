@@ -13,15 +13,14 @@
   height: 0;
 }
 
-#profileLanding h1,body{
+#relationship h1,body{
   font-family: 'Fredericka the Great', cursive;
   color:#fef4e7;
 }
 p.hide{
   display: none;
 }
-body{
-  background-image: url('/img/profileBack.jpg');
+#relationship{
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -48,13 +47,14 @@ h1,h2{
     width: 182px;
 }
 
-.ladySmiling {
-  width: 36%;
-  height: 100%;
-  background-image: url('/img/whoWeAreMain.JPG');
-  background-size: contain;
-  height: 35rem;
+main {
+  background-image: url('/img/relationshipBack.jpeg');
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+  height:30rem;
+  text-align: center;
+  width: 100%;
 }
 .bio{
   width: 64%;
@@ -88,7 +88,7 @@ width: 43%;
   background-color:#7f4a33;
 }
 ul {
-  
+  padding: 1% 1% 1% 18%;
   list-style-type: none;
   text-decoration: none;
 }
@@ -103,8 +103,7 @@ ul {
   }
 
 p{
-  background-color: #febdabb5;
-  width: 20%;
+  color: #474e21;
 }
 
  ul li  {
@@ -118,55 +117,13 @@ p{
   color: #f4d3bd;
 }
 
-.fa-chevron-down {
-  margin-left: 10px;
-}
-.words {
-  /* background: #ffffffc7; */
-    background: #ffffffc7;
-    background-image: url(/img/birds.gif);
-    background-size: contain;
-    /* background-repeat: no-repeat; */
-    width: 100%;
-    font-size: 30px;
-    float: right;
+form{
+  width: 23%;
+  background-color: #8a5834;
 }
 
-
-
-.talkingGirlsGif{
-  width: 100%;
-  box-shadow: 0 0 8px 8px #f0b322;
-  background-color: #efb532;
-  padding: 1% 1% 1% 1%;
+footer{
+width:100%; 
+color: white;
+background-color: #8a5834;
 }
-
-
-.img {
-  
-  width: 38%;
-  margin-left: 15%;
-}
-.title {
-  margin-right: -28%;
-  padding-right: 30rem;
-  display: -webkit-box;
-
-}
-.rightSpan {
-  color:rgba(132,160,216,255);
-  margin-right: 40px;
-}
-.leftSpan {
-  color:rgba(186,185,189,255);
-}
-
-header img {
-  margin-left: 60px;
-}
-.ad{
-  width: 90%;
-  padding:4% 4% 4% 30%
-}
-
-

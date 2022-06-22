@@ -28,3 +28,47 @@
 } 
 
 
+body{
+  background-color: aqua;
+  display: flex;
+  flex-wrap: ;
+}
+header, main, footer {
+  width: 100%;
+}
+header {
+  height: 10rem;
+  color: rgb(35, 31, 32);
+  background-color: #f8cf66;
+  text-align: center;
+  /* background-image: url('/img/sunset.gif'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+nav{
+
+}
+li {
+  
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.fa-leaf {
+          /* background-color: #febdab; */
+    font-weight: bold;
+    float: left;
+    /* margin: 4% 8% 1% 0%; */
+    /* background-color: #ffffff; */
+    padding: 1% 2% 0% 1%;
+}
+
+
+
+ ul li  {
+  /* margin-right: 40px; */
+  
+  color: white;
+  text-decoration: none;
+}

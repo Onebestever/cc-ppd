@@ -253,14 +253,7 @@ app.post('/sendSms',  (req, res) => {
   })
 
 
-  app.delete('/deleteOrder', (req, res) => {
-    db.collection('journalEntries').findOneAndDelete({
-      _id: ObjectId(req.body.postObjectID)
-    }, (err, result) => {
-      if (err) return res.send(500, err)
-      res.send('Message deleted!')
-    })
-  })
+
 
   // partners page Routes ===============================================================
   app.get('/partner', isLoggedIn, async function (req, res) {
@@ -280,14 +273,15 @@ app.post('/sendSms',  (req, res) => {
   });
 
   // PROFILE client add to do list SECTION =========================
-
+  
   app.post('/toDoListAdd',  (req, res) => {
     let user = ObjectId(req.user._id)
     console.log('HELLOOOOOO ITS ME',req.body)
     db.collection('toDoList').insertOne({
       chore: req.body.chore,
       date: req.body.date,
-      // postedBy: user
+      postedBy: user,
+      isStarred: false
     }, (err, result) => {
       if (err) return // console.log(err)
       //// console.log(result)
@@ -295,6 +289,22 @@ app.post('/sendSms',  (req, res) => {
       res.redirect('/profile')
     })
   })
+  /////////update todo//////////////
+
+  app.put('/crossedOutToDo',  (req, res) => {
+    db.collection('toDoList').findOneAndUpdate({
+      _id: ObjectId(req.body.id)
+    },
+    {$set: {
+      isStarred: req.body.isStarred ? false : true
+    }}, (err, result) => {
+      if (err) return // console.log(err)
+      //// console.log(result)
+      // console.log('saved to database')
+      res.redirect('/profile')
+    })
+  })
+///////////deleteToDo/////////////////////////
   
 
   // feed Page Routes for allowed  ================================================================

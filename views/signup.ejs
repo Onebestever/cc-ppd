@@ -1,62 +1,88 @@
 <!doctype html>
 <html>
 <head>
-    <title>21 Savage Fan Site</title>
+    <title>Sign-Up</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/signup.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 </head>
+
+
 <body id="signUp">
-<div class="container signUp">
-<div class="col-sm-6 col-sm-offset-3">
 
-    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+    <header>
+        <nav>
+            <ul>
+              <a href="/whoWeAre"> <li> <i class="fa fa-leaf fa" aria-hidden="true">Who We Are</i></li></a>
+              <a href="/profile"> <li><i class="fa fa-leaf fa" aria-hidden="true"> Profile</i></li></a>
+              <a href="/signup"> <li> <i class="fa fa-leaf fa" aria-hidden="true">Sign Up</i></li></a>
+              <a href="/login"> <li><i class="fa fa-leaf fa" aria-hidden="true">Log In</i></li></a>
+              <a href="/logout"> <li><i class="fa fa-leaf fa" aria-hidden="true">Log Out</i></li></a>
+              <li><i class="fa fa-leaf fa" aria-hidden="true">Events</i></li>
+              <li><i class="fa fa-leaf fa" aria-hidden="true">News</i></li>    
+          </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container signUp">
+            <div class="col-sm-6 col-sm-offset-3">
+            
+                <h1><span class="fa fa-sign-in"></span> Signup</h1>
+            
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+            
+                <!-- LOGIN FORM -->
+                <form action="/signup" method="post">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <fieldset>
+                        <legend>Not A User but a Viewer?</legend>
+            
+                        <label for="cars">Which viewer are you?? :</label>
+                            
+                            <select id="viewerType" name="viewerType">
+                            <option value="doctor">Doctor</option>
+                              <option value="partner">Partner</option>
+                              <option value="lovedOne">LovedOne</option>
+                              <option value="client">Client</option>
+                            </select>
+                    </fieldset>
+            
+                    <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+                </form>
+            
+                <hr>
+            
+                <p>Already have an account? <a href="/login">Login</a></p>
+                <p>Or go <a href="/">home</a>.</p>
+            
+            </div>
+            </div>
 
-    <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
+   <footer>
+    <section>    
+    <h4 class="title">Post Partum Direction Copyright ©2022 </h4>
+    <span class="rightSpan">Carla Hores</span>
+    </section>
+   </footer>
+ </main>
 
-    <!-- LOGIN FORM -->
-    <form action="/signup" method="post">
-        <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" name="firstName">
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="lastName">
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
-        </div>
-        <fieldset>
-            <legend>Not A User but a Viewer?</legend>
-
-            <label for="cars">Which viewer are you?? :</label>
-                
-                <select id="viewerType" name="viewerType">
-                <option value="doctor">Doctor</option>
-                  <option value="partner">Partner</option>
-                  <option value="lovedOne">LovedOne</option>
-                  <option value="client">Client</option>
-                </select>
-        </fieldset>
-
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
-    </form>
-
-    <hr>
-
-    <p>Already have an account? <a href="/login">Login</a></p>
-    <p>Or go <a href="/">home</a>.</p>
-
-</div>
-</div>
 </body>
 </html>

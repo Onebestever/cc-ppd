@@ -19,8 +19,11 @@
 
 
 
-body{
-  font-family: 'Fredericka the Great', cursive;
+#partner{
+  font-family: 'Bebas Neue', cursive;
+font-family: 'Fredericka the Great', cursive;
+font-family: 'Fruktur', cursive;
+font-family: 'Rubik Glitch', cursive;
   display: flex;
   flex-wrap: wrap;
 }
@@ -29,16 +32,44 @@ button{
   background-color: transparent;
   border: 1px solid transparent;
 }
-header {
+header, main, footer {
   width: 100%;
+}
+header {
   height: 10rem;
-  color: rgb(35, 31, 32);
+  color: #231f20;
   background-color: #f8cf66;
   text-align: center;
   /* background-image: url('/img/sunset.gif'); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+main{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.rightSection {
+  width: 70%;
+}
+.leftSection{
+  width: 30%;
+}
+.imageHolder{
+  width: 100%;
+}
+  .profileImage{
+  width: 50%;
+    }
+    .logs{
+      text-align: center;
+    }
+footer{
+  background-color: #231f20;
+
 }
 nav{
 
@@ -63,7 +94,7 @@ li {
  ul li  {
   /* margin-right: 40px; */
   
-  color: white;
+  color: black;
   text-decoration: none;
 }
 
@@ -91,40 +122,11 @@ h2{
   display: flex;
   flex-wrap: nowrap;
 }
-.ladySmiling {
+/* .ladySmiling {
   width: 50%;
   height: 20rem;
   background-image: url('/img/indexMain.jpg');
   background-size: cover;
   height: 35rem;
   background-repeat: no-repeat;
-}
-.bio{
-  width: 50%;
-      display: flex;
-    flex-wrap: wrap;
-    background-size: contain;
-    height: 35rem;
-    background-repeat: no-repeat;
-
-}
-.bottomBox {
-  border: 2px solid black;
-  width: 100%;
-  height: 9rem;
-  color: white;
-  background-color: rgb(35, 31, 32);
-}
-
-
-.words {
-  /* background: #ffffffc7; */
-    background: #ffffffc7;
-    /* background-image: url(/img/birds.gif); */
-    background-size: cover;
-    width: 100%;
-    font-size: 30px;
-    float: right;
-}
-
-
+} */
