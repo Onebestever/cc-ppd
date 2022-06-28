@@ -1,10 +1,70 @@
-#loginLanding h1,body{
+
+
+
+
+
+body{
   font-family: 'Fredericka the Great', cursive;
-  color:#f3cd88;
-  background-image: url(img/login_back.png);
-  background-repeat: no-repeat;
+
+  background-image: url('/img/signUP.png');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-wrap: wrap;
 }
-#signUp{
-  background-color: aqua;
+
+.form-control{
+  padding:1% 1% 1% 1% ;
 }
+header, main, footer {
+  width: 100%;
+}
+header {
+  height: 6rem;
+  color: rgb(35, 31, 32);
+  background-color: #f8cf66;
+  text-align: center;
+  /* background-image: url('/img/sunset.gif'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+li {
+  
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.fa-leaf {
+          /* background-color: #febdab; */
+    color: black;
+    font-weight: bold;
+    float: left;
+    /* margin: 4% 8% 1% 0%; */
+    /* background-color: #ffffff; */
+    padding: 1% 2% 0% 1%;
+}
+
+
+
+ ul li  {
+  /* margin-right: 40px; */
+  
+  color: white;
+  text-decoration: none;
+}
+
+ul{
+    margin: 2% 0% 0% 13%;
+}
+
+
+  .col-sm-offset-3{
+
+    border: 2px solid #676d64;
+    /* border: solid; */
+    width: 39%;
+  }
+

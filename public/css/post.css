@@ -1,0 +1,39 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+
+
+.container{
+  background-color: aquamarine;
+  font-family: 'Fredericka the Great', cursive;
+  display: flex;
+  flex-wrap: wrap;
+  background-image: url('/img/feedBackground.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 45rem;
+}
+
+.message{
+  background-image: url('/img/postItBack.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

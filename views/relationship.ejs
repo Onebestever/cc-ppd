@@ -70,16 +70,18 @@
 
       <ul class="ListOfUsers">
         <% for(var i=0; i < allUsers[0].relationship.length; i++) {%>
-        <li class="message">
-          <span style="<%= allUsers[0].relationship[i].isStarred ? 'color:green' : 'color:black' %>">
-            <%=  allUsers[0].relationship[i].email %> </span>
+
+          <li class="message">
+          <h4>  Added:User <span style="<%= allUsers[0].relationship[i].isStarred ? 'color:green' : 'color:black' %>">
+            <%=  allUsers[0].relationship[i].email %> </span> 
         </li>
+
 
         <!-- <span><%= user._id %></span> -->
 
-        <span><i data-userIsStarred="<%= allUsers[0].relationship[i].isStarred %>" data-index="<%= i %>"
+    <span><i data-userIsStarred="<%= allUsers[0].relationship[i].isStarred %>" data-index="<%= i %>"
             class="fa fa-star"></i></span>
-        <span><i data-index="<%= i %>" class="fa fa-trash"></i></span>
+        <span><i data-index="<%= i %>" class="fa fa-trash"></i></span> </h4> 
 
         <% } %>
       </ul>

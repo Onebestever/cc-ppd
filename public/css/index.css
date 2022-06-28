@@ -99,6 +99,12 @@ h2{
   height: 35rem;
   background-repeat: no-repeat;
 }
+
+.talkingGirlsGif{
+  width: 100%;
+}
+
+
 .bio{
   width: 50%;
       display: flex;

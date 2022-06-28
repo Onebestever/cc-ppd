@@ -54,13 +54,11 @@
                      <h2>To-Do List</h2>
                         <ul class="ToDoList">
                             <% for(var i=0; i<toDoList.length; i++) {%>
-                                <li class="message">
+                                <li class="message"> Task:
                                     <span style="<%= toDoList[i].isStarred  ? 'color:green' : 'color:black' %>">
                                       <%= toDoList[i].chore %> </span>
                                   </li>
-                                <li class="message">  Date:<%= toDoList[i].date %> </li>
-                                <li>  Task:<%= toDoList[i].chore %>  </li>
-                                <!-- <li>Posted By:<%= toDoList[i].postedBy %> </li>   -->
+                                <li>Date:<%= toDoList[i].date %> </li>  
                                 <span><i data-toDoStarred="<%= toDoList[i].isStarred %>" data-toDoId="<%= toDoList[i]._id %>"
                                     class="fa fa-star"></i></span>
                                 <span><i data-toDoId="<%= toDoList[i]._id %>" class="fa fa-trash"></i></span>

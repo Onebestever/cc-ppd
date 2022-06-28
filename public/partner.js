@@ -36,7 +36,7 @@ Array.from(trash).forEach(function(element) {
   const toDoId = element.dataset.todoid
   element.addEventListener('click', function(){
     fetch('deleteTask', {
-      method: 'put',
+      method: 'delete',
       headers: {
         'Content-Type': 'application/json'
       },

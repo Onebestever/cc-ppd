@@ -1,89 +1,95 @@
-<!doctype html>
+
+    <!doctype html>
 <html>
 <head>
     <title>User Profile</title>
    
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="style/profile.css">
-    <link rel="stylesheet" href="css/partner.css">
+    <!-- <link rel="stylesheet" href="style/profile.css"> -->
+    <link rel="stylesheet" href="css/doctor.css">
+    <script src="https://kit.fontawesome.com/e70d27db35.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
 </head>
-<body id="viewersPage">
-<div class="containerLanding">
+<body id="partner">
+    <header>
+            <nav>
+                <ul>
+                <a href="/"> <li><i class="fa fa-leaf fa" aria-hidden="true"> Home</i></li></a>
+                <a href="/whoWeAre"> <li> <i class="fa fa-leaf fa" aria-hidden="true">Who We Are</i></li></a>
+                <a href="/profile"> <li><i class="fa fa-leaf fa" aria-hidden="true"> Profile</i></li></a>
+                <a href="/signup"> <li> <i class="fa fa-leaf fa" aria-hidden="true">Sign Up</i></li></a>
+                <a href="/login"> <li><i class="fa fa-leaf fa" aria-hidden="true">Log In</i></li></a>
+                <a href="/logout"> <li><i class="fa fa-leaf fa" aria-hidden="true">Log Out</i></li></a>
+                <a href="/relationship"> <li><i class="fa fa-leaf fa" aria-hidden="true"> Add Viewers</i></li></a>
+                <a href="/feed"> <li><i class="fa fa-leaf fa" aria-hidden="true"> View Feed</i></li></a>
+                <a href="/chart"> <li><i class="fa fa-leaf fa" aria-hidden="true"> View charts</i></li></a>
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Doctor Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        <a href="/" class="btn btn-default btn-sm">Home</a>
-        <a href="/profile" class="btn btn-default btn-sm">Profile</a>
-        <a href="/relationship" class="btn btn-default btn-sm">Add Viewers</a>
-        <a href="/chart" class="btn btn-default btn-sm">View charts</a>
-        <a href="/feed" class="btn btn-default btn-sm">View feed</a>
-    </div>
+            </nav>
+        </section>
+    </header>
 
-    <div class="row">
+        <main>
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-<!-- render stuff if this user exist -->
-                <% if (user.local.email) { %>
-                    <p>
-                        <!-- <strong>id</strong>: <%= user._id %><br> -->
-                        <strong>First Name</strong>: <%= user.local.firstName %><br>
-                        <strong>Last Name</strong>: <%= user.local.lastName %><br>
-                        <!-- <strong>email</strong>: <%= user.local.date %><br> -->
-                        <!-- <strong>password</strong>: <%= user.local.password %> -->
-                    </p>
+            <section class="leftSection">
+                <h3><span class="fa fa-user"></span> Doctor</h3>
+                <!-- render stuff if this user exist -->
+                                <% if (user.local.email) { %>
+                                    <p>
+                                        <!-- <strong>id</strong>: <%= user._id %><br> -->
+                                        <strong>First Name</strong>: <%= user.local.firstName %><br>
+                                        <strong>Last Name</strong>: <%= user.local.lastName %><br>
+                                        <!-- <strong>email</strong>: <%= user.local.date %><br> -->
+                                        <!-- <strong>password</strong>: <%= user.local.password %> -->
+                                    </p>
+                <section class="imageHolder">
+                    <img class="profileImage" src="/img/doctorProfile.jpeg">
+                </section>
+     </section>
+             <section class="rightSection"> 
+                       
+                 <section class="logs">
+                     <h2>Notes</h2>
+                        
+                                <img class="drFeed" src="/img/drFeed.jpg">
+                    <ul class="messages">
+                        <% for(var i=0; i<journalEntries.length; i++) {%>
+                        <li class="message">
+                                    Date:<%= journalEntries[i].date %>
+                                    Stress Rate:<%= journalEntries[i].stressLevel %>
+                                    DailyPost:<%= journalEntries[i].dailyPost %>
+                                    User:<%= journalEntries[i].email %>
+        
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-
-                    <div class="logs">
-    
-                        <% console.log(journalEntries) %>
-                        <ul class="entries">
-                                <% for(let i=0; i<journalEntries.length; i++) {%>
-                                    <div>
-                                    <p class="hide"><%= journalEntries[i]._id %></p>
-                                    <p class="hide"><%= journalEntries[i].starred %></p>
-                                    <!-- rendering logentries -->
-                                    <% if (journalEntries[i].starred === true){ %>
-                                            <li style="color:pink"> <%=journalEntries[i].date %> </li>
-                                            <li style="color:pink"> <%=journalEntries[i].dailyPost %>
-                                            <li style="color:pink"><%= journalEntries[i].emotion %></li>
-                                            <li style="color:pink"><%= journalEntries[i].stressLevel %></li>
-                                            <li style="color:pink"><%= journalEntries[i].harmful %></li>
-                                            <li style="color:pink"><%= journalEntries[i].note %></li>   
-                                            <span><i class="fa fa-star"></i></span>                               
-                                    <% } else { %>
-                                    <li style="color:black"> <%=journalEntries[i].date %> </li>
-                                    <li style="color:black"> <%=journalEntries[i].dailyPost %> </li>
-                                    <span><i class="fa fa-star"></i></span> 
-                                    <span><i class="fa fa-trash"></i></span> 
-                                   <span><i class="fa-solid fa-star-shooting"></i></span>
-                                       <% }%>
-                                       <% console.log('this is ',journalEntries[i]) %>
-                                    </div>
+                                </li>
                                 <% } %>
-                        </ul> 
-                    </div>
-                    <% } else { %>
-                        <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                    <% } %>
-    
-                    </div>
-    
+                                </ul>
 
-                    <!-- LOCAL INFORMATION -->
+                                    <% } else { %>
+                                        <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                                    <% } %>
+                      </section>
+             </section>
+         
+    
+                            <!-- LOCAL INFORMATION -->
+    </main>
+    <footer>
+        <section class="img">
+            <img class="ad" src="images/ad.jpg">
+          </section>
+        
+           <h4 class="title">Post Partum Direction Copyright ©2022 </h4>
+              <span class="rightSpan">Carla Hores</span>
+    </footer>
                 
 
-<script src="main.js"></script>
+
+<script src="partner.js"></script>
 
 </body>
 </html>

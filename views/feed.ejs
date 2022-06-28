@@ -5,19 +5,21 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/feed.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Fruktur&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fec081edb2.js" crossorigin="anonymous"></script>
 </head>
 <body id="feed">
 <div class="container">
 
     <div class="page-header text-center">
-        <h1>Feed</h1>
-        <a href="/profile">Profile</a>
+        <a href="/profile" class="btn btn-default btn-sm">Profile</a>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+       <h1>Feed</h1>
     </div>
 
-    <div class="row">
 
-
+  
           <ul class="messages">
             <% for(var i=0; i<journalEntries.length; i++) {%>
               <li class="message">

@@ -20,10 +20,8 @@
 
 
 #partner{
-  font-family: 'Bebas Neue', cursive;
+ 
 font-family: 'Fredericka the Great', cursive;
-font-family: 'Fruktur', cursive;
-font-family: 'Rubik Glitch', cursive;
   display: flex;
   flex-wrap: wrap;
 }
@@ -54,6 +52,13 @@ main{
 
 .rightSection {
   width: 70%;
+    background-image: url('/img/partnerBack.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    color: #f4788d;
+    text-shadow: 2px 2px 18px white;
 }
 .leftSection{
   width: 30%;
@@ -70,8 +75,7 @@ main{
 footer{
   background-color: #231f20;
 
-}
-nav{
+
 
 }
 li {
@@ -122,11 +126,3 @@ h2{
   display: flex;
   flex-wrap: nowrap;
 }
-/* .ladySmiling {
-  width: 50%;
-  height: 20rem;
-  background-image: url('/img/indexMain.jpg');
-  background-size: cover;
-  height: 35rem;
-  background-repeat: no-repeat;
-} */

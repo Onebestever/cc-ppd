@@ -1,4 +1,3 @@
-
 const user = require("./models/user");
 
 
@@ -305,6 +304,14 @@ app.post('/sendSms',  (req, res) => {
     })
   })
 ///////////deleteToDo/////////////////////////
+app.delete('/deleteTask', (req, res) => {
+  db.collection('toDoList').findOneAndDelete({
+    _id: ObjectId(req.body.id)
+  }, (err, result) => {
+    if (err) return res.send(500, err)
+    res.redirect('/profile')
+  })
+})
   
 
   // feed Page Routes for allowed  ================================================================
@@ -349,13 +356,9 @@ app.post('/sendSms',  (req, res) => {
 
 
   /* 
-
-
-
   app.put('/favorite', (req, res) => {
     // console.log('hey im the id ' ,req.body)
     db.collection('dailyMoods')
-
     .findOneAndUpdate({
       _id: ObjectId(req.body.id)
     }, {
@@ -370,7 +373,6 @@ app.post('/sendSms',  (req, res) => {
       res.send(result)
     })
   })
-
   */
 
 

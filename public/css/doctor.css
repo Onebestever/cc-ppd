@@ -1,0 +1,130 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+
+
+#partner{
+  font-family: 'Fredericka the Great', cursive;
+  flex-wrap: wrap;
+}
+
+button{
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+header, main, footer {
+  width: 100%;
+}
+header {
+  height: 10rem;
+  color: #231f20;
+  background-color: #f8cf66;
+  text-align: center;
+  /* background-image: url('/img/sunset.gif'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+main{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.rightSection {
+  width: 70%;
+}
+img.drFeed{
+  width: 100%;
+}
+.leftSection{
+  width: 30%;
+}
+.imageHolder{
+  width: 100%;
+}
+  .profileImage{
+  width: 50%;
+    }
+    .logs{
+      text-align: center;
+    }
+footer{
+  background-color: #231f20;
+}
+
+
+ul {
+  
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.fa-leaf {
+       /* background-color: #febdab; */
+       font-weight: bold;
+       float: left;
+       /* margin: 4% 8% 1% 0%; */
+       background-color: #febdab;
+       padding: 1% 2% 0% 1%;
+  }
+
+
+
+ ul li  {
+  /* margin-right: 40px; */
+  
+  color: #474e21;
+  text-decoration: none;
+
+}
+
+  h1{
+    width: 100%;
+    text-align: center;
+    color: #f4788d;
+    text-shadow: 2px 2px white;
+    font-size: 2.5rem;
+
+} 
+  
+h2{
+  /* background-color: #f4a73f; */
+  text-align: center;
+  color: #f4788d;
+  text-shadow: 2px 2px white;
+} 
+  .logo{
+    width: 15%;
+    
+  }
+  
+.h1Logo{
+  display: flex;
+  flex-wrap: nowrap;
+}
+/* .ladySmiling {
+  width: 50%;
+  height: 20rem;
+  background-image: url('/img/indexMain.jpg');
+  background-size: cover;
+  height: 35rem;
+  background-repeat: no-repeat;
+} */
